@@ -15,11 +15,11 @@ if (!empty($busqueda)){
 
 switch ($tb) {
     case 'CUIT':
-        $donde=" WHERE cuit LIKE '%".$busqueda."%' AND";
+        $donde="AND fecha_baja IS NULL AND cuit LIKE '%".$busqueda."%'";
 
        	break;
     case 'RS':
-        $donde=" WHERE razon_social LIKE '%".$busqueda."%' AND";
+        $donde="AND fecha_baja IS NULL AND razon_social LIKE '%".$busqueda."%'";
 
        	break;
 	case 'DNICUIL':

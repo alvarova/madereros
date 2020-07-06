@@ -3,7 +3,8 @@
 //*******************************
 //  Define variables globales
 //*******************************
-$base="/xampp/htdocs/madereros";
+//$base="/xampp/htdocs/madereros";
+$base="c:/wamp64/www/madereros/";
 
 $libs = "./libs";
 $css = "./assets/css";
