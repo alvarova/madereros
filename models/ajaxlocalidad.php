@@ -1,6 +1,7 @@
 <?php
 
   /*Definiciones de pseudo-tokens y conector a DB */
+  /* SOLO CONSULTA */
 
 require_once('dbconn.php');
          //var_dump($_POST);
