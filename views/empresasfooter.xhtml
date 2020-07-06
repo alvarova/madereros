@@ -1,0 +1,91 @@
+
+		<!-- Data Tables -->
+		<script src="assets/vendor/datatables/dataTables.min.js"></script>
+		<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Data tables -->
+		<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+		<script src="assets/vendor/datatables/custom/fixedHeader.js"></script>
+
+		<!-- Download / CSV / Copy / Print -->
+		<script src="assets/vendor/datatables/buttons.min.js"></script>
+		<script src="assets/vendor/datatables/jszip.min.js"></script>
+		<!-- script src="assets/vendor/datatables/pdfmake.min.js"></script -->
+		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
+		<script src="assets/vendor/datatables/html5.min.js"></script>
+		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
+		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
+		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+
+		<script type="text/javascript" language="javascript" >
+		 $(document).ready(function(){
+
+		 	$('#shBusqueda').click(function(){ 	
+				$('#consultaForm').toggle();
+				document.getElementById("shBusqueda").innerHTML = "[+]";
+			});
+
+			var submit = document.getElementById('submit'); 
+			$('a#byCUIT').click(function(){ 	
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "CUIT";
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por CUIT";
+			});
+			$('a#byCUITH').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "CUITH";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por CUIT en Historial";
+			});
+			$('a#byRS').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "RS";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Razon Social";
+			});
+			$('a#byRSH').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "RSH";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Razon Social en Historial";
+			});
+
+			submit.addEventListener('click', function(event){ 
+			    updateform('consultaForm'); 
+			}); 
+
+
+			
+			function updateform(id){
+			    var data = $('#'+id).serialize();
+			     //alert("sale:"+data);
+
+
+			    $.ajax({
+			        type: 'POST',
+			        url: "./models/getlist.php",
+			        data: data,
+			        success: function(data) {
+			        	//alert(data);
+			        	//var table = $('#scrollVertical').DataTable();
+			        	//table.clear().draw();
+			        	//dataArr=Array.from(data);
+			        	//table.row.add(data    					).draw();
+			            $('#tablaBusqueda').html(data);
+			             //alert(data);
+			            //alert(data);
+			        },
+			        error: function(data) { // if error occured
+			            alert("Error occured, please try again");
+			        },
+			    });
+
+			}
+
+			$('form input').keydown(function (e) {
+			    if (e.keyCode == 13) {
+			        e.preventDefault();
+			        updateform('consultaForm');
+			        return false;
+			    }
+			});
+
+		 });
+		</script>

@@ -1,0 +1,58 @@
+
+		<!-- Data Tables -->
+		<script src="assets/vendor/datatables/dataTables.min.js"></script>
+		<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Data tables -->
+		<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+		<script src="assets/vendor/datatables/custom/fixedHeader.js"></script>
+
+		<!-- Download / CSV / Copy / Print -->
+		<script src="assets/vendor/datatables/buttons.min.js"></script>
+		<script src="assets/vendor/datatables/jszip.min.js"></script>
+		<!-- script src="assets/vendor/datatables/pdfmake.min.js"></script -->
+		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
+		<script src="assets/vendor/datatables/html5.min.js"></script>
+		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
+		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
+		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+
+
+        <!-- Datepickers -->
+		<script src="assets/vendor/datepicker/js/picker.js"></script>
+		<script src="assets/vendor/datepicker/js/picker.date.js"></script>
+        
+        
+		<script type="text/javascript" language="javascript" >
+		 $(document).ready(function(){
+
+            $('.datepicker').pickadate({
+                monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Juilo', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                today: 'Hoy',
+                clear: 'Cancelar',
+                close: 'Cerrar',
+                editable: true,
+                selectYears: true,
+                formatSubmit: 'yyyy-mm-dd'
+            })
+
+            console.log('sale');
+
+			$('#localidad').change(function() {
+				data = "id="+$('select option:selected').val();
+				console.log(data);
+				$.ajax({
+			        type: 'POST',
+			        url: "./models/ajaxlocalidad.php",
+			        data: data,
+			        success: function(data) {
+						$("#codigo_postal").val(data);
+			        },
+			        error: function(data) { // if error occured
+			            alert("Error occured, please try again");
+			        },
+			    });
+			});
+		 });
+		</script>

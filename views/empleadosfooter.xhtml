@@ -1,0 +1,120 @@
+
+<div class="modal fade bd-example-modal-sm" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"  id="mySmallModalLabel">Modal Title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				No se encontraron registros para su busqueda.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary">Aceptar</button>
+			</div>
+		</div>
+  </div>
+</div>
+
+
+		<!-- Data Tables -->
+		<script src="assets/vendor/datatables/dataTables.min.js"></script>
+		<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Data tables -->
+		<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+		<script src="assets/vendor/datatables/custom/fixedHeader.js"></script>
+
+		<!-- Download / CSV / Copy / Print -->
+		<script src="assets/vendor/datatables/buttons.min.js"></script>
+		<script src="assets/vendor/datatables/jszip.min.js"></script>
+		<!-- script src="assets/vendor/datatables/pdfmake.min.js"></script -->
+		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
+		<script src="assets/vendor/datatables/html5.min.js"></script>
+		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
+		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
+		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+
+<script type="text/javascript" language="javascript" >
+		 $(document).ready(function(){
+
+		 	$('#shBusqueda').click(function(){ 	
+				$('#consultaForm').toggle();
+				document.getElementById("shBusqueda").innerHTML = "[+]";
+			});
+
+			var submit = document.getElementById('submit'); 
+			$('a#byDNICUIL').click(function(){ 	
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "DNICUIL";
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL";
+			});
+			$('a#byDCH').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "DNICUILH";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL en Historial";
+			});
+			$('a#byAN').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "AN";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre";
+			});
+			$('a#byANH').click(function(){ 
+				elemento = document.getElementById("tipobusqueda");
+				elemento.value = "ANH";			
+				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre en Historial";
+			});
+
+			submit.addEventListener('click', function(event){ 
+			    updateform('consultaForm'); 
+			}); 
+
+
+			
+			function updateform(id){
+			    var data = $('#'+id).serialize();
+			     //alert("sale:"+data);
+
+
+			    $.ajax({
+			        type: 'POST',
+			        url: "./models/getlist.php",
+			        data: data,
+			        success: function(data) {
+			        	//alert(data);
+			        	//var table = $('#scrollVertical').DataTable();
+			        	//table.clear().draw();
+			        	//dataArr=Array.from(data);
+						//table.row.add(data    					).draw();
+						console.log(data);
+						if (data=="Sin resultados") {
+							console.log("se ejecuta"); 
+							$("#mymodal").modal("show");
+						}else{
+						$('#tablaBusqueda').html(data);		            
+			             //alert(data);
+						//alert(data);
+						}
+			        },
+			        error: function(data) { // if error occured
+			            alert("Error occured, please try again");
+			        },
+			    });
+
+			}
+
+			$('form input').keydown(function (e) {
+			    if (e.keyCode == 13) {
+			        e.preventDefault();
+			        updateform('consultaForm');
+			        return false;
+			    }
+			});
+
+		 });
+		
+		</script>
+		{$modal}
