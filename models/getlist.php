@@ -43,7 +43,7 @@ switch ($tb) {
 		case empresas:
 			$tabla='empresa empr';
 			$idtabla = 'id_empresa';
-			$localidad = ", localidad lo WHERE empr.id_localidad = lo.id_localidad AND flg_baja=0 AND";
+			$localidad = ", localidad lo WHERE empr.id_localidad = lo.id_localidad AND flg_baja=0 ";
 		break;
      
 		case empleados:
@@ -63,7 +63,6 @@ switch ($tb) {
     $query->execute();
     $parse="";
 
-
 if($query->rowCount() < 1){
 	echo 'Sin resultados';
 }
@@ -79,7 +78,7 @@ else{
 								  <td>'. $row['razon_social']. '</td>
 								  <td>'. $row['telefono']. '</td>
 								  <td>'. $row['domicilio']. '</td>
-								  <td>'. $row['id_localidad']. '</td>
+								  <td>'. $row['localidad']. '</td>
 								  <td>'. $row['fecha_alta']. '</td>
 								  <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empresas&ver='.$row['id_empresa'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
