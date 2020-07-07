@@ -17,6 +17,27 @@
   </div>
 </div>
 
+
+<div id="mymodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"  id="mySmallModalLabel">Atenci&oacute;n</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="tipoMsjTXT">
+				No se encontraron registros para su b&uacute;squeda.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+  </div>
+</div>
+
+
 		<!-- Data Tables -->
 		<script src="assets/vendor/datatables/dataTables.min.js"></script>
 		<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
@@ -51,7 +72,7 @@
 			});
 			$('a#byCUITH').click(function(){ 
 				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "CUITH";			
+				elemento.value = "HCUIT";			
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por CUIT en Historial";
 			});
 			$('a#byRS').click(function(){ 
@@ -59,14 +80,14 @@
 				elemento.value = "RS";			
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Razon Social";
 			});
-			$('a#byRSH').click(function(){ 
+			$('a#byRSH').click(function(){
 				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "RSH";			
+				elemento.value = "HRS";			
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Razon Social en Historial";
 			});
 
 			submit.addEventListener('click', function(event){ 
-			    updateform('consultaForm'); 
+				updateform('consultaForm');
 			}); 
 
 
@@ -81,9 +102,20 @@
 			        url: "./models/getlist.php",
 			        data: data,
 			        success: function(data) {
-						
-			            $('#tablaBusqueda').html(data);
-
+			        	//alert(data);
+			        	//var table = $('#scrollVertical').DataTable();
+			        	//table.clear().draw();
+			        	//dataArr=Array.from(data);
+			        	//table.row.add(data    					).draw();
+			            if (data=="Sin resultados"){
+			        		$("#mymodal").modal("show");
+			        		document.getElementById("tipoMsjTXT").innerHTML = "No se encontraron registros para su b&uacute;squeda.";
+			        	}
+			        	else{
+			        		$('#tablaBusqueda').html(data);
+			        	}
+			             //alert(data);
+			            //alert(data);
 			        },
 			        error: function(data) { // if error occured
 			            alert("Error occured, please try again");
