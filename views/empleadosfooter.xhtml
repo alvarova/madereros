@@ -39,7 +39,6 @@
 
 <script type="text/javascript" language="javascript" >
 		 $(document).ready(function(){
-		 	var filtro=0;
 		 	
 		 	$('#shBusqueda').click(function(){ 	
 				$('#consultaForm').toggle();
@@ -48,40 +47,29 @@
 
 			var submit = document.getElementById('submit'); 
 			$('a#byDNICUIL').click(function(){ 	
-				filtro = 1;
 				elemento = document.getElementById("tipobusqueda");
 				elemento.value = "DNICUIL";
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL";
 			});
 			$('a#byDCH').click(function(){ 
-				filtro = 1;
 				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "DNICUILH";		
+				elemento.value = "HDNICUIL";		
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL en Historial";
 			});
 			$('a#byAN').click(function(){ 
-				filtro = 1;
 				elemento = document.getElementById("tipobusqueda");
 				elemento.value = "AN";		
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre";
 			});
 			$('a#byANH').click(function(){ 
-				filtro = 1;
 				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "ANH";			
+				elemento.value = "HAN";			
 				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre en Historial";
 			});
 
 			
 			submit.addEventListener('click', function(event){ 
-				if ($('#busqueda').val() == "" && filtro == 1){
-					$("#mymodal").modal("show");
-					document.getElementById("tipoMsjTXT").innerHTML = "Debe ingresar algun texto por el cual buscar.";
-					
-				}	
-				else{
 					updateform('consultaForm');
-				}
 			}); 
 
 

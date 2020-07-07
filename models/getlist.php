@@ -10,58 +10,79 @@ require_once('dbconn.php');
         $donde='';
 
 
-
 if (!empty($busqueda)){
 
-switch ($tb) {
-    case 'CUIT':
-        $donde="AND fecha_baja IS NULL AND cuit LIKE '%".$busqueda."%'";
+	switch ($tb) {
+	    case 'CUIT':
+	        $donde="AND fecha_baja IS NULL AND cuit LIKE '%".$busqueda."%'";
+	       	break;
 
-       	break;
-    case 'RS':
-        $donde="AND fecha_baja IS NULL AND razon_social LIKE '%".$busqueda."%'";
+	    case 'RS':
+	        $donde="AND fecha_baja IS NULL AND razon_social LIKE '%".$busqueda."%'";
+	       	break;
 
-       	break;
-	case 'DNICUIL':
-		$donde="AND fecha_baja IS NULL AND (documento LIKE '%".$busqueda."%' OR cuil LIKE '%".$busqueda."%')"; 
-		
-	   	break;
-	case 'AN':
-		$donde="AND fecha_baja IS NULL AND (apellido LIKE '%".$busqueda."%' OR nombre LIKE '%".$busqueda."%')";
+		case 'DNICUIL':
+			$donde="AND fecha_baja IS NULL AND (documento LIKE '%".$busqueda."%' OR cuil LIKE '%".$busqueda."%')"; 
+			break;
 
-		break;
-    default:
-        $donde = " ";      
+		case 'AN':
+			$donde="AND fecha_baja IS NULL AND (apellido LIKE '%".$busqueda."%' OR nombre LIKE '%".$busqueda."%')";
+			break;
 
-      	break;
-   }
-          
+		case 'HCUIT':
+			$donde="AND fecha_baja IS NOT NULL AND cuit LIKE '%".$busqueda."%'";
+	       	break;
+
+	    case 'HRS':
+	    	$donde="AND fecha_baja IS NOT NULL AND razon_social LIKE '%".$busqueda."%'";
+	       	break;
+
+	    case 'HDNICUIL':
+	    	$donde="AND fecha_baja IS NOT NULL AND (documento LIKE '%".$busqueda."%' OR cuil LIKE '%".$busqueda."%')"; 
+			break;
+
+		case 'HAN':
+			$donde="AND fecha_baja IS NOT NULL AND (apellido LIKE '%".$busqueda."%' OR nombre LIKE '%".$busqueda."%')";
+			break;
+
+	    default:
+	        $donde = " ";
+	      	break;
+	   }         
+}
+else{
+	$valor = $tb[0];
+	if($valor == 'H')
+		$donde = "AND fecha_baja IS NOT NULL ";
+	else
+		$donde = "AND fecha_baja IS NULL ";
 }
 
 
-	switch ($token) {
-		case empresas:
-			$tabla='empresa empr';
-			$idtabla = 'id_empresa';
-			$localidad = ", localidad lo WHERE empr.id_localidad = lo.id_localidad AND flg_baja=0 ";
-		break;
-     
-		case empleados:
-			$tabla='empleado empl';
-			$idtabla = 'id_empleado';
-			$localidad = ", localidad lo WHERE empl.id_localidad = lo.id_localidad AND flg_baja=0 ";
-		break;
+switch ($token) {
+	case empresas:
+		$tabla='empresa empr';
+		$idtabla = 'id_empresa';
+		$localidad = ", localidad lo WHERE empr.id_localidad = lo.id_localidad AND flg_baja=0 ";
+	break;
+ 
+	case empleados:
+		$tabla='empleado empl';
+		$idtabla = 'id_empleado';
+		$localidad = ", localidad lo WHERE empl.id_localidad = lo.id_localidad AND flg_baja=0 ";
+	break;
 
-		default:
-			die(json_encode(array('error' => 'Sin identificador de tablas.')));      
-		break;
-	}
+	default:
+		die(json_encode(array('error' => 'Sin identificador de tablas.')));      
+	break;
+}
 
 
-    $consulta =  "SELECT * FROM ".$tabla. $localidad .$donde." ORDER BY ".$idtabla;
-    $query = $dbconn->prepare($consulta);
-    $query->execute();
-    $parse="";
+$consulta =  "SELECT * FROM ".$tabla. $localidad .$donde." ORDER BY ".$idtabla;
+var_dump($consulta);
+$query = $dbconn->prepare($consulta);
+$query->execute();
+$parse="";
 
 if($query->rowCount() < 1){
 	echo 'Sin resultados';
@@ -83,11 +104,10 @@ else{
 								  <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empresas&ver='.$row['id_empresa'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			
-			echo $parse;	
-									
-       break;     
+			echo $parse;						
+       	break;     
 
-     case empleados:
+     	case empleados:
 		    while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 				$parse = $parse.'<tr>
 								  <td>'.$row['documento']. '</td>
@@ -101,14 +121,12 @@ else{
 							      <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empleados&ver='.$row['id_empleado'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			echo $parse;						
-       break; 
+       	break; 
 
-
-
-     default:
-         die(json_encode(array('error' => 'Sin identificador de tablas.')));      
-       break;
+	    default:
+        	die(json_encode(array('error' => 'Sin identificador de tablas.')));      
+        break;
    }
 }
 
-    $dbconn = null;
+$dbconn = null;
