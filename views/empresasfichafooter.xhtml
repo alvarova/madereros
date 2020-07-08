@@ -54,5 +54,79 @@
 			        },
 			    });
 			});
+
+			
+			function ValidaStr(str, idCampo)
+			{
+				sale="";	
+
+				if (str.length<3) { 
+						//alert('El campo no es correcto, o no es correcta la información ingresada...'); 
+						$('#'+idCampo).focus();
+				} else { sale=str; }	
+				return(sale);
+			}
+			function ValidaNum(str, idCampo)
+			{
+				sale="";
+				if (idCampo=='cuit') { var lon=11;}
+				else if (idCampo=='telefono') { var lon=8;}
+				else { var lon=2;}
+
+				if (str.length<lon) { 
+					//alert('El campo no es correcto, o no es correcta la información ingresada...');
+					$('#'+idCampo).focus(); 
+				} else { sale=str;}
+
+				return(sale);
+			}
+
+
+			var submit = document.getElementById('submit'); 
+			submit.addEventListener('click', function(event){ 
+			    updateform('consultaForm'); 
+			}); 
+			
+			function updateform(id){
+				
+				if (ValidaStr($('#razon_social').val(), 'razon_social')=="") {
+					alert("El campo debe tener al menos 4 Caracteres.")
+				} else if (ValidaNum($('#cuit').val(), 'cuit')=="") {
+					alert("El CUIT debe tener al menos 11 numeros")	
+				} else if (ValidaStr($('#domicilio').val(), 'domicilio')=="") {
+					alert("El campo debe tener al menos 4 Caracteres.")				
+				} else if (ValidaNum($('#telefono').val(), 'telefono')=="") {
+					alert("El campo debe tener al menos 7 Caracteres.")				
+				} else if (ValidaStr($('#correo_electronico').val(), 'correo_electronico')=="") {
+					alert("El campo debe tener al menos 8 Caracteres.")				
+				} else if (ValidaNum($('#fecha_inicio_actividad').val(), 'fecha_inicio_actividad')=="") {
+					alert("El campo no debe ser nulo.")				
+				} else {
+						var data = $('#'+id).serialize();
+						alert("Evaluar "+data);
+						$.ajax({
+							type: 'POST',
+							url: "./models/add_records_ajax.php",
+							data: data,
+							success: function(data) {
+								
+								$('#tablaBusqueda').html(data);
+
+							},
+							error: function(data) { // if error occured
+								alert("Error occured, please try again");
+							},
+						});
+				}
+			}
+
+			$('form input').keydown(function (e) {
+			    if (e.keyCode == 13) {
+			        e.preventDefault();
+			        updateform('consultaForm');
+			        return false;
+			    }
+			});
+
 		 });
 		</script>

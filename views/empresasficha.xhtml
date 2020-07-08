@@ -1,6 +1,6 @@
 <div class="row justify-content-center gutters">
 						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
-							<form>
+							<form id="consultaForm" name="consultaForm">
 								<div class="card m-0">
 									<div class="card-header">
 										<div class="card-title">Ficha EMPRESAS</div>
@@ -59,35 +59,35 @@
 											<div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
 												<div class="form-group">
 													<label for="razon_social" class="col-form-label">Razon Social</label>
-													<input type="text" class="form-control" id="razon_social" placeholder="Razon social" value="{$razon_social}">
+													<input type="text" class="form-control" id="razon_social" name="razon_social" placeholder="Razon social" value="{$razon_social}" required>
 												</div>
 												<div class="form-group">
 													<label for="cuit" class="col-form-label">CUIT</label>
-													<input type="text" class="form-control" id="cuit" placeholder="CUIT" value="{$cuit}">
+													<input type="text" class="form-control" id="cuit" name="cuit" placeholder="CUIT" value="{$cuit}" required>
 												</div>
 												
 												<div class="form-group">
 													<label for="domicilio" class="col-form-label">Domicilio</label>
-													<input type="text" class="form-control" id="domicilio" placeholder="Calle N 1234" value="{$domicilio}">
+													<input type="text" class="form-control" id="domicilio" name="domicilio" placeholder="Calle N 1234" value="{$domicilio}" required>
 												</div>
 												
 											 <div class="row" >
 												<div class="form-group col">
 													<label for="localidad" class="col-form-label">Localidad</label>
-														<select class="form-control" id="localidad">	
+														<select class="form-control" id="localidad" name="localidad">	
 															{$listaLocalidades}
 														</select>
 												</div>
 												<div class="form-group col">
 													<label for="codigo_postal" class="col-form-label">Código Postal</label>
-													<input type="text" class="form-control" id="codigo_postal" placeholder="3000" value="{$codigo_postal}">
+													<input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="3000" value="{$codigo_postal}">
 												</div>
 											 </div>														
 
 											 <div class="form-group col" >
 												<label class="label">Inicio de actividades</label>
 												<div class="custom-date-input ">
-													<input type="text" name="alta" id="fecha_inicio_actividad" class="datepicker form-control" data-value="{$fecha_inicio_actividad}" >
+													<input type="text" name="fecha_inicio_actividad" id="fecha_inicio_actividad" class="datepicker form-control" data-value="{$fecha_inicio_actividad}" required>
 												</div>
 											</div>
 
@@ -100,11 +100,11 @@
 
 												<div class="form-group">
 													<label for="telefono" class="col-form-label">Telefono</label>
-													<input type="text" class="form-control" id="telefono" placeholder="0342-4550000" value="{$telefono}">
+													<input type="text" class="form-control" id="telefono" name="telefono" placeholder="0342-4550000" value="{$telefono}" required>
 												</div>
 												<div class="form-group">
 													<label for="correo_electronico" class="col-form-label">Email</label>
-													<input type="text" class="form-control" id="correo_electronico" placeholder="correo@direcionemail.com" value="{$correo_electronico}">
+													<input type="text" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="correo@direcionemail.com" value="{$correo_electronico}" required>
 												</div>
 												<div class="form-group justify-content-end">
 													<button type="button" class="btn btn-primary">
@@ -116,7 +116,7 @@
 													<div class="form-group col" >
 														<label class="label">Alta de empresa</label>
 														<div class="custom-date-input ">
-															<input type="text" name="fecha_alta" id="fecha_alta" class="datepicker form-control" data-value="{$fecha_alta}" value="{$fecha_alta}" >
+															<input type="text" name="fecha_alta" id="fecha_alta"  class="datepicker form-control" data-value="{$fecha_alta}" value="{$fecha_alta}" >
 														</div>
 													</div>
 													

@@ -10,6 +10,11 @@
     return $aux;
   }
 
+  var_dump($_POST);
+  $token  = trim($_POST["product"]);
+  $price    = trim($_POST["price"]);
+  $category = trim($_POST["category"]);
+
 	switch ($token) {
 		case empresas:
 			$tabla='empresa empr';
@@ -25,9 +30,8 @@
 			die(json_encode(array('error' => 'Sin identificador de tablas.')));      
 		break;
 	}
-  $product  = trim($_POST["product"]);
-  $price    = trim($_POST["price"]);
-  $category = trim($_POST["category"]);
+  
+  
 
 // prepare sql and bind parameters
     $stmt = $dbconn->prepare("INSERT INTO tbl_products(product_name, price, category)
