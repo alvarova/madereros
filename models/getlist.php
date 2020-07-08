@@ -63,13 +63,13 @@ switch ($token) {
 	case empresas:
 		$tabla='empresa empr';
 		$idtabla = 'id_empresa';
-		$localidad = ", localidad lo WHERE empr.id_localidad = lo.id_localidad AND flg_baja=0 ";
+		$otrasTablas = ", localidad lo, rama_empresa re WHERE empr.id_localidad = lo.id_localidad AND empr.id_rama_empresa = re.id_rama_empresa AND flg_baja=0 ";
 	break;
  
 	case empleados:
 		$tabla='empleado empl';
 		$idtabla = 'id_empleado';
-		$localidad = ", localidad lo WHERE empl.id_localidad = lo.id_localidad AND flg_baja=0 ";
+		$otrasTablas = ", localidad lo, categoria_empleado ce WHERE empl.id_localidad = lo.id_localidad AND empl.id_categoria_empleado = ce.id_categoria_empleado AND flg_baja=0 ";
 	break;
 
 	default:
@@ -78,8 +78,8 @@ switch ($token) {
 }
 
 
-$consulta =  "SELECT * FROM ".$tabla. $localidad .$donde." ORDER BY ".$idtabla;
-var_dump($consulta);
+$consulta =  "SELECT * FROM ".$tabla. $otrasTablas .$donde." ORDER BY ".$idtabla;
+//var_dump($consulta);
 $query = $dbconn->prepare($consulta);
 $query->execute();
 $parse="";
@@ -95,12 +95,13 @@ else{
 		'id_empresa' ,  'razon_social' 'cuit' 'correo_electronico' 'domicilio' 'telefono' 'fecha_inicio_actividad' 'id_localidad' 'id_rama_empresa' 'id_usuario_sistema' 'fecha_alta' 'fecha_baja' 'flg_baja'*/
 			while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 				$parse = $parse.'<tr>
-								  <td>'.$row['cuit']. '</td>
-								  <td>'. $row['razon_social']. '</td>
-								  <td>'. $row['telefono']. '</td>
-								  <td>'. $row['domicilio']. '</td>
-								  <td>'. $row['localidad']. '</td>
-								  <td>'. $row['fecha_alta']. '</td>
+								  <td>'.$row['cuit'].'</td>
+								  <td>'.$row['razon_social'].'</td>
+								  <td>'.$row['telefono'].'</td>
+								  <td>'.$row['domicilio'].'</td>
+								  <td>'.$row['rama_empresa'].'</td>
+								  <td>'.$row['localidad'].'</td>
+								  <td>'.$row['fecha_alta'].'</td>
 								  <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empresas&ver='.$row['id_empresa'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			
@@ -110,14 +111,15 @@ else{
      	case empleados:
 		    while($row = $query->fetch(PDO::FETCH_ASSOC)) {
 				$parse = $parse.'<tr>
-								  <td>'.$row['documento']. '</td>
-								  <td>'.$row['cuil']. '</td>
-								  <td>'.$row['apellido']. '</td>
-							      <td>'.$row['nombre']. '</td>
-							      <td>'.$row['telefono']. '</td>
-							      <td>'.$row['domicilio']. '</td>
-							      <td>'.$row['localidad']. '</td>
-							      <td>'.$row['fecha_alta']. '</td>
+								  <td>'.$row['documento'].'</td>
+								  <td>'.$row['cuil'].'</td>
+								  <td>'.$row['apellido'].'</td>
+							      <td>'.$row['nombre'].'</td>
+							      <td>'.$row['telefono'].'</td>
+							      <td>'.$row['domicilio'].'</td>
+							      <td>'.$row['categoria_empleado'].'</td>
+							      <td>'.$row['localidad'].'</td>
+							      <td>'.$row['fecha_alta'].'</td>
 							      <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empleados&ver='.$row['id_empleado'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			echo $parse;						
