@@ -1,13 +1,11 @@
 {* Contenedor final - Muestra pagina inicial *}
 {* Viene de main.xhtml *}
 
-<div class="row gutters">
-
-
-
-<div class="col-4" style="float:right;"><span class="badge badge-pill badge-danger col-1" id="shBusqueda" >[-]</span></div>
+<div class="row gutters justify-content-between">
+	<div class="col-4" style="float:right;"><span class="badge badge-pill badge-danger col-1" id="shBusqueda" >[-]</span></div><div class="col-4"></div>
+	<div class="col-2"> <a class="btn btn-secondary" href="#" role="button">AGREGAR EMPRESA</a>	</div>
 	<form id="consultaForm" name="consultaForm" action="index.php" method="post" class="col-12">
-										<div class="col-xl-6 col-lglg-6 col-md-6 col-sm-12 col-12">
+										<div class="col-xl-6 col-lglg-8 col-md-8 col-sm-12 col-12">
 											<div class="form-group">
 												<div class="input-group mb-3">
 													<div class="input-group-prepend">
@@ -25,8 +23,10 @@
 													</div>
 													<input type="text" class="form-control" aria-label="Text input with segmented dropdown button" id="busqueda" name="busqueda"> 
 												</div>
+
 											</div>
 										</div>
+
 										<div class="col-xl-6 col-lglg-6 col-md-6 col-sm-12 col-12">
 											<input type="hidden" id="tipobusqueda" name="tipobusqueda" value="CUIT">
 											<span class="badge badge-pill badge-info" id="tipobusquedaTXT" >Búqueda por CUIT</span>
@@ -36,19 +36,12 @@
 										</div>
 	</form>
 
-		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-		<div class="col-xl-4">
-			<div class="card-body">
-				<div class="custom-btn-group">
-					<a class="btn btn-secondary" href="#" role="button">AGREGAR EMPRESA</a>
-				</div>
-			</div>
-		</div>
-	</div>
+
+	
 
 </div>
 
-				<div class="table-container">
+<div class="table-container">
 								<div class="t-header">Listado de Empresas</div>
 								<div class="table-responsive">
 									<table id="hideSearchExample" class="table table-hover table-bordered table-light m-0">
@@ -65,17 +58,8 @@
 											</tr>
 										</thead>
 										<tbody id='tablaBusqueda'>
-											<tr>
-											  <td>30000000001</td>
-											  <td>Razon Social S.A.</td>
-											  <td>342-4520000</td>
-											  <td>Domicilio 4020</td>
-											  <td>Rama Muebles</td>
-											  <td>Localidad</td>
-											  <td>01/06/2020</td>
-											  <td>Acciones</td>
-											</tr>											
+																						
 										</tbody>
 						    	</table>
 								</div>
-				</div>
+</div>

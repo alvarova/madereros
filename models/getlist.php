@@ -102,7 +102,7 @@ else{
 								  <td>'.$row['rama_empresa'].'</td>
 								  <td>'.$row['localidad'].'</td>
 								  <td>'.$row['fecha_alta'].'</td>
-								  <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empresas&ver='.$row['id_empresa'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
+								  <td><div class="td-actions"><a href="javascript:void(0);" onClick="verObservacion(\''.$row['razon_social'].'\');" class="icon red" data-toggle="tooltip" data-placement="top" title="Ver Observaciones"><i class="icon-bell"></i></a><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar Empleado"><i class="icon-user-plus"></i></a><a href="./?acc=empresasficha&idEmpr'.$row['id_empresa'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Dar de Baja"><i class="icon-circle-with-minus"></i></a><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			
 			echo $parse;						
@@ -120,7 +120,7 @@ else{
 							      <td>'.$row['categoria_empleado'].'</td>
 							      <td>'.$row['localidad'].'</td>
 							      <td>'.$row['fecha_alta'].'</td>
-							      <td><div class="td-actions"><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Agregar"><i class="icon-circle-with-plus"></i></a><a href="./index.php?acc=empleados&ver='.$row['id_empleado'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
+							      <td><div class="td-actions"><a href="javascript:void(0);" onClick="verObservacion(\''.$row['apellido'].'\',\''.$row['nombre'].'\');" class="icon red" data-toggle="tooltip" data-placement="top" title="Ver Observaciones"><i class="icon-bell"></i></a><a href="./index.php?acc=empleados&ver='.$row['id_empleado'].'" class="icon green" data-toggle="tooltip" data-placement="top" title="Ver/Modificar"><i class="icon-save"></i></a><a href="#" class="icon blue" data-toggle="tooltip" data-placement="top" title="Dar de Baja"><i class="icon-circle-with-minus"></i></a><a href="#" class="icon red" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="icon-cancel"></i></a></div></td></tr>';
 		    }
 			echo $parse;						
        	break; 

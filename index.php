@@ -19,9 +19,12 @@ if(isset($_POST['enter'])){
 
 	$con1=new Connect(usuario, pass, server, db);
 	$user = $con1->selectLoginPassword('usuario', $data);
+	//var_dump($user);
 	if($user){
 		$_SESSION = $user;
+		//var_dump($data);
 		$_SESSION['usuario']  = $data['login'];
+		$_SESSION['id_usuario'] = $user['id_usuario'];
 		//$_SESSION['seccion'] = $data['seccion'];
 		$_SESSION['instante']   = time();
 	}

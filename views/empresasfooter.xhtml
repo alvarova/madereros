@@ -1,14 +1,57 @@
-<div id="mymodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+<div id="observModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"  id="mySmallModalLabel">Atenci&oacute;n</h5>
+				<h5 class="modal-title" id="myLargeModalLabel">Observaciones de la empresa:</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				No se encontraron registros para su b&uacute;squeda.
+				<div class="row justify-content-center gutters">
+						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+							<form id="consultaForm" name="consultaForm">
+								<div class="card m-0">
+									<div class="card-body">
+										<div class="row gutters">
+											<div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+
+												<div class="form-group">
+													<label class="label">Fecha</label>
+													<div class="custom-date-input ">
+														<input type="text" name="fecha_observacion" id="fecha_observacion" class="datepicker form-control" data-value="{$fecha_observacion}" value="{$fecha_observacion}">
+													</div>
+												</div>
+
+												<div class="form-group col">
+													<label for="motivo" class="col-form-label">Motivo de la observaci&oacute;n</label>
+														<select class="form-control" id="motivo" name="motivo">	
+															{$listaMotivo}
+														</select>
+												</div>
+
+												<div class="form-group">
+													<label for="detalle" class="col-form-label">Detalle</label>
+													<textarea type="text" class="form-control" id="detalle" name="detalle" placeholder="Detalle" value="{$detalle}" required></textarea>
+												</div>																						
+											</div>
+																				
+										
+										
+										</div>
+										
+										<div class="row gutters">
+
+											<div class="btn-group ">
+												<button type="button" id="submit" name="submit" class="btn btn-primary float-right">Guardar</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
@@ -27,7 +70,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body" id="tipoMsjTXT">
+			<div class="modal-body">
 				No se encontraron registros para su b&uacute;squeda.
 			</div>
 			<div class="modal-footer">
@@ -55,8 +98,15 @@
 		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
 		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
 		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
-
 		<script type="text/javascript" language="javascript" >
+		
+	function verObservacion(razSocial){
+		document.getElementById("myLargeModalLabel").innerHTML = 'Observaciones de la empresa: '+razSocial;
+		$('#observModal').modal("show");
+	}
+		
+		
+			
 		 $(document).ready(function(){
 
 		 	$('#shBusqueda').click(function(){ 	
