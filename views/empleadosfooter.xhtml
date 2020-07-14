@@ -1,5 +1,88 @@
+<div id="observModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myLargeModalLabel">Observaciones del Empleado</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row justify-content-center gutters">
 
-<div id="mymodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+							<div class="col-4"><span class="badge badge-pill badge-danger col-1" id="shAltaObser" >[+] Agregar Observacion</span></div>
+							<form id="altaForm" name="altaForm">
+								<input type="hidden" id="idEmpl" name="idEmpl" value="yes" />
+								<input type="hidden" id="esDeEmpr" name="esDeEmpr" value="0" />
+								<div class="card m-0">
+									<div class="card-body">
+										<div class="row gutters">
+											<div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+
+												<div class="form-group">
+													<label class="label">Fecha</label>
+													<div class="custom-date-input ">
+														<input type="text" name="fecha_observacion" id="fecha_observacion" class="datepicker form-control" data-value="{$fecha_observacion}" value="{$fecha_observacion}">
+													</div>
+												</div>
+
+												<div class="form-group col">
+													<label for="motivo" class="col-form-label">Motivo</label>
+														<select class="form-control" id="motivo_obser" name="motivo_obser">	
+														</select>
+												</div>
+
+												<div class="form-group">
+													<label for="detalle" class="col-form-label">Detalle</label>
+													<textarea type="text" class="form-control" id="detalle" name="detalle" placeholder="Detalle" value="{$detalle}" required></textarea>
+												</div>																						
+											</div>
+																				
+										
+										
+										</div>
+										
+										<div class="row gutters">
+
+											<div class="btn-group ">
+												<button type="button" id="submit" name="submit" class="btn btn-primary float-right">Guardar</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="table-container">
+						<div class="t-header">Listado de observaciones</div>
+						<div class="table-responsive">
+							<table id="hideSearchExample" class="table table-hover table-bordered table-light m-0">
+								<thead>
+									<tr>
+										<th class="no-sort">Fecha</th>
+										<th class="no-sort">Motivo</th>
+										<th class="no-sort">Detalle</th>
+										<th class="no-sort">Acciones</th>
+									</tr>
+								</thead>
+								<tbody id='tablaObserv'>
+								
+								</tbody>
+						</table>
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+  </div>
+</div>
+
+<div id="mymodalMSJ" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -19,101 +102,165 @@
 </div>
 
 
-		<!-- Data Tables -->
-		<script src="assets/vendor/datatables/dataTables.min.js"></script>
-		<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Data Tables -->
+<script src="assets/vendor/datatables/dataTables.min.js"></script>
+<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
 
-		<!-- Custom Data tables -->
-		<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
-		<script src="assets/vendor/datatables/custom/fixedHeader.js"></script>
+<!-- Custom Data tables -->
+<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+<script src="assets/vendor/datatables/custom/fixedHeader.js"></script>
 
-		<!-- Download / CSV / Copy / Print -->
-		<script src="assets/vendor/datatables/buttons.min.js"></script>
-		<script src="assets/vendor/datatables/jszip.min.js"></script>
-		<!-- script src="assets/vendor/datatables/pdfmake.min.js"></script -->
-		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
-		<script src="assets/vendor/datatables/html5.min.js"></script>
-		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
-		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
-		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+<!-- Download / CSV / Copy / Print -->
+<script src="assets/vendor/datatables/buttons.min.js"></script>
+<script src="assets/vendor/datatables/jszip.min.js"></script>
+<!-- script src="assets/vendor/datatables/pdfmake.min.js"></script -->
+<script src="assets/vendor/datatables/vfs_fonts.js"></script>
+<script src="assets/vendor/datatables/html5.min.js"></script>
+<script src="assets/vendor/datatables/buttons.print.min.js"></script>
+<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
+<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
 
 <script type="text/javascript" language="javascript" >
-		 $(document).ready(function(){
-		 	
-		 	$('#shBusqueda').click(function(){ 	
-				$('#consultaForm').toggle();
-				document.getElementById("shBusqueda").innerHTML = "[+]";
-			});
 
-			var submit = document.getElementById('submit'); 
-			$('a#byDNICUIL').click(function(){ 	
-				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "DNICUIL";
-				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL";
-			});
-			$('a#byDCH').click(function(){ 
-				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "HDNICUIL";		
-				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL en Historial";
-			});
-			$('a#byAN').click(function(){ 
-				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "AN";		
-				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre";
-			});
-			$('a#byANH').click(function(){ 
-				elemento = document.getElementById("tipobusqueda");
-				elemento.value = "HAN";			
-				document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre en Historial";
-			});
+	function verObservacion(idEmpl, apel, nom){
+		document.getElementById("myLargeModalLabel").innerHTML = 'Observaciones del empleado: '+apel+' '+nom;
+		document.getElementById("idEmpl").value = idEmpl;
+		$('#observModal').modal("show");
+		observListado('altaForm');
+		observMotivos('altaForm');
+	}
 
-			
-			submit.addEventListener('click', function(event){ 
-					updateform('consultaForm');
-			}); 
+	function observMotivos(id){
+	    var data = $('#'+id).serialize();
+	    
+	    $.ajax({
+	        type: 'POST',
+	        url: "./models/ajaxmotivoobservacion.php",
+	        data: data,
+	        success: function(data) {
+	        	$('#motivo_obser').html(data);
+	        },
+	        error: function(data) { // if error occured
+	            alert("Error occured, please try again");
+	        },
+	    });
+	}
+
+	function observListado(id){
+	    var data = $('#'+id).serialize();
+
+	    $.ajax({
+	        type: 'POST',
+	        url: "./models/empleadoobservaciones.php",
+	        data: data,
+	        success: function(data) {
+	        	if (data=="Sin datos"){
+	        		document.getElementById("tablaObserv").innerHTML = 'No se registran observaciones.';
+	        	}
+	        	else{
+	        		$('#tablaObserv').html(data);
+	        	}   
+	        },
+	        error: function(data) { // if error occured
+	            alert("Error occured, please try again");
+	        },
+	    });
+
+	    $.ajax({
+	        type: 'POST',
+	        url: "./models/ajaxmotivoobservacion.php",
+	        data: data,
+	        success: function(data) {
+	        	$('#motivo_obser').html(data);
+	        },
+	        error: function(data) { // if error occured
+	            alert("Error occured, please try again");
+	        },
+	    });
+	}
+
+	
+
+	$(document).ready(function(){
+ 	
+	 	$('#shBusqueda').click(function(){ 	
+			$('#consultaForm').toggle();
+			document.getElementById("shBusqueda").innerHTML = "[+]";
+		});
+
+		$('#shAltaObser').click(function(){ 	
+			$('#altaForm').toggle();
+			document.getElementById("shAltaObser").innerHTML = "[-] Agregar Observacion";
+		});
+
+		var submit = document.getElementById('submit'); 
+		$('a#byDNICUIL').click(function(){ 	
+			elemento = document.getElementById("tipobusqueda");
+			elemento.value = "DNICUIL";
+			document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL";
+		});
+		$('a#byDCH').click(function(){ 
+			elemento = document.getElementById("tipobusqueda");
+			elemento.value = "HDNICUIL";		
+			document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por DNI/CUIL en Historial";
+		});
+		$('a#byAN').click(function(){ 
+			elemento = document.getElementById("tipobusqueda");
+			elemento.value = "AN";		
+			document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre";
+		});
+		$('a#byANH').click(function(){ 
+			elemento = document.getElementById("tipobusqueda");
+			elemento.value = "HAN";			
+			document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre en Historial";
+		});
+
+	
+		submit.addEventListener('click', function(event){ 
+				updateform('consultaForm');
+		});
 
 
-			
-			function updateform(id){
-			    var data = $('#'+id).serialize();
-			     //alert("sale:"+data);
+		function updateform(id){
+	    var data = $('#'+id).serialize();
+	     //alert("sale:"+data);
 
+		    $.ajax({
+		        type: 'POST',
+		        url: "./models/getlist.php",
+		        data: data,
+		        success: function(data) {
+		        	//alert(data);
+		        	//var table = $('#scrollVertical').DataTable();
+		        	//table.clear().draw();
+		        	//dataArr=Array.from(data);
+		        	//table.row.add(data    					).draw();
+		        	if (data=="Sin resultados"){
+		        		$("#mymodalMSJ").modal("show");
+		        		document.getElementById("tipoMsjTXT").innerHTML = "No se encontraron registros para su b&uacute;squeda.";
+		        	}
+		        	else{
+		        		$('#tablaBusqueda').html(data);
+		        	}            
+		             //alert(data);
+		            //alert(data);
+		        },
+		        error: function(data) { // if error occured
+		            alert("Error occured, please try again");
+		        },
+		    });
+		}
 
-			    $.ajax({
-			        type: 'POST',
-			        url: "./models/getlist.php",
-			        data: data,
-			        success: function(data) {
-			        	//alert(data);
-			        	//var table = $('#scrollVertical').DataTable();
-			        	//table.clear().draw();
-			        	//dataArr=Array.from(data);
-			        	//table.row.add(data    					).draw();
-			        	if (data=="Sin resultados"){
-			        		$("#mymodal").modal("show");
-			        		document.getElementById("tipoMsjTXT").innerHTML = "No se encontraron registros para su b&uacute;squeda.";
-			        	}
-			        	else{
-			        		$('#tablaBusqueda').html(data);
-			        	}            
-			             //alert(data);
-			            //alert(data);
-			        },
-			        error: function(data) { // if error occured
-			            alert("Error occured, please try again");
-			        },
-			    });
-
-			}
-
-			$('form input').keydown(function (e) {
-			    if (e.keyCode == 13) {
-			        e.preventDefault();
-			        updateform('consultaForm');
-			        return false;
-			    }
-			});
-
-		 });
 		
-		</script>
+
+		$('form input').keydown(function (e) {
+		    if (e.keyCode == 13) {
+		        e.preventDefault();
+		        updateform('consultaForm');
+		        return false;
+		    }
+		});
+
+ 	});
+
+</script>

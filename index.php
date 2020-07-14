@@ -95,8 +95,6 @@ switch  ($acc) {
 			$smarty->assign('acc', "empleados");
 			$smarty->assign('tipobusqueda', empleados);
 			break;
-
-			break;
 		}
 		case 'trabajointerno': {
 			// Cargar los JS para gestion de grids 
