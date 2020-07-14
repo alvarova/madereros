@@ -106,12 +106,17 @@
 													<label for="correo_electronico" class="col-form-label">Email</label>
 													<input type="text" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="correo@direcionemail.com" value="{$correo_electronico}" required>
 												</div>
+
+												{nocache}
+												{if isset($cantidad_empleados)}
 												<div class="form-group justify-content-end">
 													<button type="button" class="btn btn-primary">
 														Cantidad de empleados <span class="badge badge-pill badge-white">{$cantidad_empleados}</span>
 														<span class="sr-only">empleados</span>
 													</button>
 												</div>
+												{/if}
+												{/nocache}
 												<div class="row" >
 													<div class="form-group col" >
 														<label class="label">Alta de empresa</label>
@@ -143,9 +148,9 @@
 													<span class="sr-only">Empresa </span>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Guardar cambios</a>
+													<a class="dropdown-item" href="#">Guardar y continuar</a>
 													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="#">Eliminar empresa</a>
+													<a class="dropdown-item" href="#">Cancelar</a>
 												</div>
 											</div>
 										</div>
