@@ -47,6 +47,7 @@ if(!isset($_SESSION['id_usuario']))
   $result=0;
   $stmt = $dbconn->prepare($insertSql);
   if($stmt->execute()){
-      $result =1;
+      $result = $dbconn->lastInsertId();
   }
   $dbconn = null;
+  echo $result;

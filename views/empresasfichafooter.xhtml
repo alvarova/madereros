@@ -46,6 +46,7 @@
                 close: 'Cerrar',
                 editable: true,
                 selectYears: true,
+				format: 'yyyy-mm-dd',
                 formatSubmit: 'yyyy-mm-dd'
             });
 
@@ -119,7 +120,7 @@
 								$(".cuitclass").append("<div class='alert alert-warning' role='alert'><i class='icon-warning'></i> ATENCION: "+data+"<a href='#' class='alert-link'>Link</a>.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
 								window.setTimeout(function () { 
 									$(".alert-warning").fadeTo(2000, 500).slideUp(500, function(){
-    $(".alert-warning").slideUp(500).remove();});
+    								$(".alert-warning").slideUp(500).remove();});
 								}, 2000);
 
 							},
@@ -162,7 +163,7 @@
 				}else {
 						
 						
-						//var fia=$('#fecha_inicio_actividad').attr('fecha_inicio_actividad_submit');
+						//FALTA DETERMINAR Si ES UPDATE O INSERT verificar si viene con id por GET/POST
 						
 						fia = $("[name='fecha_inicio_actividad_submit']").val();
 						$('#fecha_inicio_actividad').val(fia);
@@ -175,7 +176,10 @@
 							url: "./models/add_records_ajax.php",
 							data: data,
 							success: function(data) {						
-								alert('Resultado:'+data);
+								//alert('Resultado:'+data);
+								$("#linkEdit").prop("href", "index.php?acc=empresasficha&id="+data);
+								$("#addEmpleados").prop("href", "index.php?acc=empleadosalta&idEmpresa="+data);
+								$('#terminado').modal('show');
 							},
 							error: function(data) { // if error occured
 								alert("Error occured, please try again");
