@@ -40,7 +40,15 @@ include_once ('config.php');
    //echo "Sale obtener tabla -".$sale.'-';
    return $sale;
   }
-
+  function obtenerId($str)  //Empleado en AJAX
+  {
+    ////echo "Entra obtener tabla - ".$str ;
+   if ($str==strtoupper('192cdbee330355bf76c9e82d4456c2c6')) { $sale="empleado";}
+   elseif ($str==strtoupper('dcfcc703b4dad82c3f554b716b2bcd55')) { $sale="empresa";}
+   else { die('No se encontró toquen vinculado:'+$str); }
+   //echo "Sale obtener tabla -".$sale.'-';
+   return $sale;
+  }
 $result = 0;
 try {
     $dbconn = new PDO('mysql:host=localhost;dbname=soeim;charset=utf8', usuario, pass);
