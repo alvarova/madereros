@@ -6,13 +6,10 @@
 require_once('dbconn.php');
 $esDeEmpresa = sanitize($_POST['esDeEmpr']);
 
-$consulta = "SELECT -1 AS id_motivo_observacion, 'Seleccionar' AS motivo_observacion 
-                FROM DUAL
-                UNION ALL
-                SELECT id_motivo_observacion, motivo_observacion
-                FROM `motivo_observacion` 
-                WHERE es_de_empresa = ".$esDeEmpresa." 
-                ORDER BY id_motivo_observacion";
+$consulta = "SELECT id_motivo_observacion, motivo_observacion
+             FROM `motivo_observacion` 
+             WHERE es_de_empresa = ".$esDeEmpresa." 
+             ORDER BY motivo_observacion";
 
 $query = $dbconn->prepare($consulta);
 $query->execute();

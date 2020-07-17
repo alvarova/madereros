@@ -31,7 +31,7 @@ define('server','localhost');
 define('db','SOEIM');
 
 /*TOKENS */
-
+						  
   define("empleados",    '192cdbee330355bf76c9e82d4456c2c6');
   define("empresas",'dcfcc703b4dad82c3f554b716b2bcd55');
   define("trabajointerno",   'f5ffc67a958c4b8b022c506c9b9cb2d4');
@@ -39,6 +39,7 @@ define('db','SOEIM');
   define("recibos",    '1f4ecce087a3a2cb028db9cd22adf409');
   define("bocaexpendio",     '597197bebad19a94f1ab9201a8e7ceb8');
   define("sobres",'21e2742e1f95d1af0d1a1463684b570f');
+  define("observacion_empleado", 'a9f4eb5402f54d7fe9fe543928eaca7b');
 //*******************************
 //     Cargo Libreria PDO/DB
 //*******************************

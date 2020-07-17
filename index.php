@@ -94,6 +94,7 @@ switch  ($acc) {
 			$smarty->assign('token', empleados);
 			$smarty->assign('acc', "empleados");
 			$smarty->assign('tipobusqueda', empleados);
+			$smarty->assign('tablaModal', observacion_empleado);
 			break;
 		}
 		case 'trabajointerno': {
