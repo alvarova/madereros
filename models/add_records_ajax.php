@@ -10,6 +10,7 @@ if(!isset($_SESSION['id_usuario']))
  $tabla=""; 
  $varSql="";
  $intoSql="";
+ $noCamposTabla = array('esDeEmpr');
 
  end($_POST);
  $ultimo = key($_POST);
@@ -18,16 +19,20 @@ if(!isset($_SESSION['id_usuario']))
       $valido=false;
       $variable=sanitizeStore($variable); 
       $submited=substr_count($campo, 'submit');
-      
+      var_dump($submited);
       if ($campo=='token') {              //Si es token obtengo tabla
+         $tabla = obtenerTabla($variable);
+      }if ($campo=='tablaModal') {              //Si es tablaModal obtengo tabla
          $tabla = obtenerTabla($variable);
       }elseif ($submited<1) {                             //Sino encolo campos
         if ($campo=='cuit') {
            $variable=FixCuit($variable);
         }
-       $intoSql=$intoSql." `".$campo."`";
-       $varSql =$varSql." '".$variable."' ";
-       $valido=true;
+        if(!in_array($campo,  $noCamposTabla)){ 
+          $intoSql=$intoSql." `".$campo."`";
+          $varSql =$varSql." '".$variable."' ";
+          $valido=true;
+        }
       }
 
       if ($ultimo==$campo) {  //Elimino ',' que sobra y cierro parentesis
@@ -43,7 +48,7 @@ if(!isset($_SESSION['id_usuario']))
 
   }
   $insertSql="INSERT INTO $tabla (".$intoSql." VALUES (".$varSql;
-    
+    var_dump($insertSql);
   $result=0;
   $stmt = $dbconn->prepare($insertSql);
   if($stmt->execute()){
