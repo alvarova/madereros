@@ -26,7 +26,8 @@ if (is_numeric($id)){
 
    //$smarty->assign('id_empresa', $data["id_empresa"]);
    $smarty->assign('razon_social', $data["razon_social"]);
-   $smarty->assign('cuit', $data["cuit"]);
+   $cuit=str_replace("-","",trim($data['cuit']));
+   $smarty->assign('cuit', $cuit);
    $smarty->assign('correo_electronico', $data["correo_electronico"]);
    $smarty->assign('domicilio', $data["domicilio"]);
    $smarty->assign('telefono', $data["telefono"]);

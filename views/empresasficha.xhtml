@@ -87,7 +87,7 @@
 											 <div class="form-group col" >
 												<label class="label">Inicio de actividades</label>
 												<div class="custom-date-input ">
-													<input type="text" name="fecha_inicio_actividad" id="fecha_inicio_actividad" class="datepicker form-control" data-value="{$fecha_inicio_actividad}" required>
+													<input type="text" name="fecha_inicio_actividad" id="fecha_inicio_actividad" class="datepicker form-control" data-value="{$fecha_inicio_actividad}" value="{if empty($fecha_inicio_actividad)}0000-00-00{else}{$fecha_inicio_actividad}{/if}" required>
 												</div>
 											</div>
 
@@ -126,12 +126,13 @@
 													</div>
 													
 													<div class="form-group col" >
-															<label class="label">Fecha de baja</label>
-															<div class="custom-date-input ">
-																<input type="text" name="fecha_baja" id="fecha_baja" class="datepicker form-control" data-value="{$fecha_baja}" value="{if empty($fecha_baja)}0000-00-00{else}{$fecha_baja}{/if}">
-															</div>
+														<label class="label">Fecha de baja</label>
+														<div class="custom-date-input ">
+															<input type="text" name="fecha_baja" id="fecha_baja" class="datepicker form-control" data-value="{$fecha_baja}" value="{if empty($fecha_baja)}0000-00-00{else}{$fecha_baja}{/if}">
+														</div>
 													</div>
 													<input type="hidden" id="token" name="token" value="{$token}" />
+													<input type="hidden" id="id" name="id" value="{$id}" />
 												</div>												
 											</div>
 
@@ -173,9 +174,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div aria-hidden="true">Se agregó correctamente la empresa.</div>
-				<span aria-hidden="true">A continuacion Ud. puede <a href="#" id="addEmpleados" class='text-info'><b>agregar Empleados</b></a> o </span>	
-				<span aria-hidden="true">Continuar con la edición de los datos cerrando la ventana.</span>
+				<div aria-hidden="true">Se {$modoedicion} correctamente la empresa.</div>
+				<span aria-hidden="true">A continuacion Ud. puede <a href="#" id="addEmpleados" class='text-info'><b>agregar/editar Empleados</b></a> o </span>	
+				<span aria-hidden="true">o continuar con la edición de los datos.</span>
 					
 			</div>
 			<div class="modal-footer justify-content-center">

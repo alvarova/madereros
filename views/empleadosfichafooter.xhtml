@@ -14,7 +14,8 @@
 		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
 		<script src="assets/vendor/datatables/html5.min.js"></script>
 		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
-
+		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
+		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
 
 		<!-- Input Masks JS -->
 		<script src="assets/vendor/input-masks/cleave.min.js"></script>
@@ -47,7 +48,6 @@
                 selectYears: true,
 				format: 'yyyy-mm-dd',
 				formatSubmit: 'yyyy-mm-dd',
-
             });
 
             console.log('sale');
@@ -170,15 +170,13 @@
 						
 						//FALTA DETERMINAR Si ES UPDATE O INSERT verificar si viene con id por GET/POST
 						
-						fia = $("[name='fecha_inicio_actividad_submit']").val();
-						$('#fecha_inicio_actividad').val(fia);
+						//fia = $("[name='fecha_inicio_actividad_submit']").val();
+						//$('#fecha_inicio_actividad').val(fia);
 						console.log( $("[name='fecha_inicio_actividad']").val());
-						fia = $("[name='fecha_alta_submit']").val();
-						$('#fecha_alta').val(fia);						
+						//fia = $("[name='fecha_alta_submit']").val();
+						//$('#fecha_alta').val(fia);						
 						var data = $('#'+id).serialize();
-						//alert("Evaluar "+data);
-						console.log('{$modo}_record_ajax.php');
-						console.log(data);
+						alert("Evaluar "+data);
 						$.ajax({
 							type: 'POST',
 							url: "./models/{$modo}_record_ajax.php",

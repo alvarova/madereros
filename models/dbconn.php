@@ -31,13 +31,21 @@ include_once ('config.php');
     return $sale;
   }
 
-  function obtenerTabla($str)  //Empleado en AJAX
+  function FechaNull($v) {if (($v=='0000-00-00') or ($v=='1899-11-30') or ($v=="")) {  $v="NULL";} return $v;}
+
+  function obtenerTabla($str)  
   {
-    ////echo "Entra obtener tabla - ".$str ;
-   if ($str==strtoupper('192cdbee330355bf76c9e82d4456c2c6')) { $sale="empleado";}
-   elseif ($str==strtoupper('dcfcc703b4dad82c3f554b716b2bcd55')) { $sale="empresa";}
-   elseif ($str==strtoupper('a9f4eb5402f54d7fe9fe543928eaca7b')) { $sale="observacion_empleado";}
-   else { die('No se encontró toquen vinculado:'+$str); }
+    //echo "Entra obtener tabla - ".$str ;
+   if ($str==strtoupper('192cdbee330355bf76c9e82d4456c2c6')) 
+   { 
+     $sale="empleado";
+   } elseif ($str==strtoupper('dcfcc703b4dad82c3f554b716b2bcd55')) { 
+     $sale="empresa";
+   } elseif ($str==strtoupper('a9f4eb5402f54d7fe9fe543928eaca7b')) { 
+     $sale="observacion_empleado";
+   } else { 
+     die('No se encontró toquen vinculado:'.$str); 
+   }
    //echo "Sale obtener tabla -".$sale.'-';
    return $sale;
   }
