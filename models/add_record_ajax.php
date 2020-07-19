@@ -18,7 +18,7 @@ if(!isset($_SESSION['id_usuario']))
  //Viene de observaciones ¿?
  $noCamposTabla = array('esDeEmpr');
  //reseteo los forms de fechas con id _submit a campos o el token para no procesarlos como form
- if (!isset($_POST['fecha_alta_submit'])) { $_POST['fecha_alta']=FechaNull($_POST['fecha_alta']);             }else{ $_POST['fecha_alta']=FechaNull($_POST['fecha_alta_submit']); unset($_POST['fecha_baja_submit']);}
+ if (!isset($_POST['fecha_alta_submit'])) { $_POST['fecha_alta']=FechaNull($_POST['fecha_alta']);             }else{ $_POST['fecha_alta']=FechaNull($_POST['fecha_alta_submit']); unset($_POST['fecha_alta_submit']);}
  if (!isset($_POST['fecha_baja_submit'])) { $_POST['fecha_baja']=FechaNull($_POST['fecha_baja']);             }else { $_POST['fecha_baja']=FechaNull($_POST['fecha_baja_submit']); unset($_POST['fecha_baja_submit']);}
  if (!isset($_POST['fecha_inicio_actividad_submit'])) { $_POST['fecha_inicio_actividad']=FechaNull($_POST['fecha_inicio_actividad']); }else { $_POST['fecha_inicio_actividad']=FechaNull($_POST['fecha_inicio_actividad_submit']); unset($_POST['fecha_inicio_actividad_submit']);}
  if (isset($_POST['token'])) { 

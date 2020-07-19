@@ -13,13 +13,25 @@ if(!isset($_SESSION['id_usuario']) and (!isset($_SESSION['id'])))
 
  $tabla=""; 
  $intoSql="";
- $idReg = sanitizeStore($_POST['id']);  //Traigo ID del empleado/empresa
-unset($_POST['id']);
 
-//reseteo los forms de fechas con id _submit a campos
-if (isset($_POST['fecha_baja_submit'])) { $_POST['fecha_baja']=$_POST['fecha_baja_submit']; unset($_POST['fecha_baja_submit']);}
-if (isset($_POST['fecha_inicio_actividad_submit'])) { $_POST['fecha_inicio_actividad']=$_POST['fecha_inicio_actividad_submit']; unset($_POST['fecha_inicio_actividad_submit']);}
-if (isset($_POST['fecha_alta_submit'])) { $_POST['fecha_alta']=$_POST['fecha_alta_submit']; unset($_POST['fecha_alta_submit']);}
+ //reseteo los forms de fechas con id _submit a campos o el token para no procesarlos como form
+ if (!isset($_POST['fecha_alta_submit'])) { $_POST['fecha_alta']=FechaNull($_POST['fecha_alta']);             }else{ $_POST['fecha_alta']=FechaNull($_POST['fecha_alta_submit']); unset($_POST['fecha_alta_submit']);}
+ if (!isset($_POST['fecha_baja_submit'])) { $_POST['fecha_baja']=FechaNull($_POST['fecha_baja']);             }else { $_POST['fecha_baja']=FechaNull($_POST['fecha_baja_submit']); unset($_POST['fecha_baja_submit']);}
+ if (!isset($_POST['fecha_inicio_actividad_submit'])) { $_POST['fecha_inicio_actividad']=FechaNull($_POST['fecha_inicio_actividad']); }else { $_POST['fecha_inicio_actividad']=FechaNull($_POST['fecha_inicio_actividad_submit']); unset($_POST['fecha_inicio_actividad_submit']);}
+ if (isset($_POST['token'])) { 
+   $tabla = obtenerTabla(strtoupper($_POST['token']));  
+   unset($_POST['token']);
+ }
+
+ 
+ $idReg = sanitizeStore($_POST['id']);  //Traigo ID del empleado/empresa
+ unset($_POST['id']);
+
+
+
+
+
+
 
 end($_POST);
 $ultimo = key($_POST);
@@ -44,8 +56,8 @@ $ultimo = key($_POST);
          if ($campo=='token') {                              //Si es token obtengo tabla
           $tabla = obtenerTabla($variable); 
          }else {
-          //$intoSql=$intoSql.", "; 
-          $intoSql=$intoSql." `".$campo."` = '".$variable."' ";
+          if ($variable==='NULL') { $intoSql=$intoSql." `".$campo."` = ".$variable.", "; }
+          else { $intoSql=$intoSql." `".$campo.'` = "'.$variable.'", ';}
         }
       }   //Si es ultimo cierro )
        
@@ -54,10 +66,10 @@ $ultimo = key($_POST);
     
   $result=0;
   $stmt = $dbconn->prepare($sql);
-  var_dump($sql);
-  /*if($stmt->execute()){
-      $result =1;
-  }*/
+  //var_dump($sql);
+  if($stmt->execute()){
+      $result =$idReg;
+  }
   $dbconn = null;
-
+echo $result;
 
