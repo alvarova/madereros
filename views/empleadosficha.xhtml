@@ -3,41 +3,111 @@
 							<form>
 								<div class="card m-0">
 									<div class="card-header">
-										<div class="card-title">Ficha EMPRESA</div>
+										<div class="card-title">Ficha Empleados</div>
 										<ul class="text-muted custom">
-											<li>* Custom form controls and selects are also supported.</li>
-											<li>* You can then remix that once again with size-specific column classes.</li>
-											<li>* Group checkboxes or radios on the same horizontal row by adding .form-check-inline to any .form-check.</li>
+											<li>* Recuerde mantener los registros actualizados y completos.</li>
+											<li>* Evite omitir o completar con informacion no fidedigna.</li>
+											<li>* Verifique que el texto ingresado es correcto.</li>
 										</ul>
 									</div>
 									<div class="card-body">
-										
+	
+	<!--id_empleado/nro_afiliado/id_tipo_documento/documento/nombre/apellido/cuil/correo_electronico/domicilio
+	telefono/fecha_nacimiento/sexo/-->
+	 
 										<div class="row gutters">
 											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
 												<div class="form-group">
-													<label for="inputName" class="col-form-label">Name</label>
-													<input type="text" class="form-control" id="inputName" placeholder="Name">
+													<label for="apellido" class="col-form-label">Nombre y Apellido</label>
+													<input type="text" class="form-control" id="apellido" placeholder="Apellido">
+													<input type="text" class="form-control" id="nombre" placeholder="Nombre">
 												</div>
 												<div class="form-group">
-													<label for="inputEmail" class="col-form-label">Your E-mail</label>
-													<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+													<label for="documento" class="col-form-label">Nro DNI/CUIT</label>
+													<input type="text" class="form-control" id="documento" placeholder="Nro DNI">
+													<input type="text" class="form-control" id="cuil" placeholder="Nro CUIL">
 												</div>
 												<div class="form-group">
-													<label for="inputMobNumber" class="col-form-label">Mobile</label>
-													<input type="number" class="form-control" id="inputMobNumber" placeholder="Mobile">
+													<label for="correo_electronico" class="col-form-label">E-mail</label>
+													<input type="text" class="form-control" id="correo_electronico" placeholder="Email">
+												</div>
+												<div class="form-group">
+													<label for="domicilio" class="col-form-label">Domicilio</label>
+													<input type="text" class="form-control" id="domicilio" placeholder="Domicilio">
+												</div>
+												<div class="form-group">
+													<label for="telefono" class="col-form-label">Telefono</label>
+													<input type="number" class="form-control" id="telefono" placeholder="Telefono">
 												</div>
 											</div>
-											<div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
 												<div class="form-group">
-													<label for="inputSubject" class="col-form-label">Subject</label>
-													<input type="text" class="form-control" id="inputSubject" placeholder="Subject">
+													<label for="fecha_nacimiento" class="col-form-label">Fecha Nacimiento</label>
+													<input type="number" class="form-control" id="fecha_nacimiento" placeholder="Fecha Nacimiento">
 												</div>
 												<div class="form-group">
-													<label for="inputMessage" class="col-form-label">Your Message</label>
-													<textarea class="form-control" id="message" placeholder="Message" maxlength="140" rows="4"></textarea>
-													<div class="form-text text-muted"><p id="characterLeft" class="help-block ">140 characters left</p></div>
+													<label for="nacionalidad" class="col-form-label">Nacionalidad</label>
+													<input type="text" class="form-control" id="nacionalidad" placeholder="Nacionalidad">
+												</div>	
+												<div class="form-group">
+													<label for="id_localidad" class="col-form-label">Localidad</label>
+													<input type="text" class="form-control" id="id_localidad" placeholder="Localidad">
+												</div>												
+												<div class="form-group">
+													<label for="sexo" class="col-form-label">Sexo</label>
+													<input type="text" class="form-control" id="sexo" placeholder="sexo">
+												</div>												
+												
+												<div class="form-group">
+													<label for="id_estado_civil" class="col-form-label">Estado Civil</label>
+													<input type="text" class="form-control" id="id_estado_civil" placeholder="Estado Civil">
 												</div>
+
 											</div>
+											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+												<div class="form-group">
+													<label for="id_categoria_empleado" class="col-form-label">Categoria</label>
+													<input type="text" class="form-control" id="id_categoria_empleado" placeholder="Categoria">
+												</div>
+												<div class="form-group">
+													<label for="id_empresa" class="col-form-label">Empresa</label>
+													<input type="text" class="form-control" id="id_empresa" placeholder="Empresa">
+												</div>
+
+												<div class="form-group">
+													<label for="sueldo" class="col-form-label">Sueldo</label>
+													<input type="text" class="form-control sueldo" id="sueldo" placeholder="Sueldo">
+												</div>
+
+												<div class="row gutters justify-content-center">
+												<div class="custom-control custom-switch">
+													<input type="checkbox" class="custom-control-input" id="es_afiliado">
+													<label class="custom-control-label" for="es_afiliado">Es afiliado sindical</label>
+												</div>	
+												</div>											
+											</div>
+											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">												
+												<!--fecha_ingreso_empresa/es_afiliado / fecha_afiliacion / sueldo / id_usuario_sistema / fecha_alta / fecha_baja-->
+												<div class="form-group">
+													<label for="fecha_ingreso_empresa" class="col-form-label">Fecha Ingreso a la empresa</label>
+													<input type="text" class="form-control" id="fecha_ingreso_empresa" placeholder="Fecha Ingreso">
+												</div>																																																
+												
+												<div class="form-group">
+													<label for="fecha_afiliacion" class="col-form-label">Fecha Afiliacion</label>
+													<input type="text" class="form-control" id="fecha_afiliacion" placeholder="Fecha Afiliacion">
+												</div>
+
+												<div class="form-group">
+													<label for="fecha_alta" class="col-form-label">Fecha Alta</label>
+													<input type="text" class="form-control" id="fecha_alta" placeholder="Fecha Alta">
+												</div>
+												<div class="form-group">
+													<label for="fecha_baja" class="col-form-label">Fecha baja</label>
+													<input type="text" class="form-control" id="fecha_baja" placeholder="Fecha baja">
+												</div>																																																												
+											</div>
+
 										</div>
 										
 										<div class="row gutters">

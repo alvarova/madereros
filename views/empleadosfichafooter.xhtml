@@ -36,6 +36,12 @@
 				uppercase: true
 			});
 		});
+		document.addEventListener('DOMContentLoaded', () => {	  //Carga Script al estar DOM listo
+			var cleave = new Cleave('.sueldo', {
+				numeral: true,
+				numeralThousandsGroupStyle: 'thousand'
+			});
+		});		
 		$(document).ready(function(){
 
             $('.datepicker').pickadate({

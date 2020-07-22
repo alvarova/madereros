@@ -72,6 +72,7 @@ switch  ($acc) {
 			$smarty->assign('token', empresas);
 			$smarty->assign('acc', "empresas");
 			$smarty->assign('tipobusqueda', empresas);
+			$smarty->assign('tablaModal', observacion_empresa);
 			break;
 		}
 		case 'empresasficha': {
@@ -90,6 +91,8 @@ switch  ($acc) {
 			} else {
 				 $modo='add'; 
 				 $smarty->assign('modoedicion', "agregó");
+				 $smarty->assign('HideBegin', '<!--');
+				 $smarty->assign('HideEnd', '-->');
 			} //  Update o Insert
 			$smarty->assign('modo', $modo);
 			$smarty->assign('acc', "empresasficha");
@@ -116,9 +119,14 @@ switch  ($acc) {
 			$smarty->assign('empresasactive', 'active-page');
 			$smarty->assign('token', empresas);
 			if (isset($_GET['id'])) 
-			{ $modo='edit';} 
-			else { $modo='add'; } //  Update o Insert
-			var_dump("-".$modo);
+			{ 
+				$modo='edit';
+			} else { 
+				$modo='add'; 
+				$smarty->assign('HideBegin', '<!--');
+				$smarty->assign('HideEnd', '-->');
+			} //  Update o Insert
+			//var_dump("-".$modo);
 			$smarty->assign('acc', "empresasficha");
 			$smarty->assign('tipobusqueda', empresas);
 			include_once("./models/empresaficha.php");

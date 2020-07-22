@@ -1,3 +1,5 @@
+<!-- MODAL OBSERVACIONES -->
+<!-- Modal -->
 <div id="observModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -8,74 +10,76 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="row justify-content-center gutters">
+				<div class="row justify-content-center gutters" style="margin-bottom: 10px;">
+					<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 cuitclass" id="shAltaObserMSJ" style="display: none;">Se ejecuto  ok</div>
+					<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+						<div class="col-4"><span class="badge badge-pill badge-danger col-12" id="shAltaObser" >[+] Agregar Observación</span></div>
+						<form id="altaForm" name="altaForm">
+							<input type="hidden" id="tablaModal" name="tablaModal" value="{$tablaModal}" />
+							<input type="hidden" id="id_empleado" name="id_empleado" value="yes" />
+							<input type="hidden" id="id_obs" name="id_obs" value="yes" />
+							<input type="hidden" id="id_motivo_ob" name="id_motivo_ob" value="yes" />
+							<input type="hidden" id="esDeEmpr" name="esDeEmpr" value="0" />
+							<input type="hidden" id="bajaElim" name="bajaElim" value="yes" />
+							<div class="card m-0">
+								<div class="card-body">
+									<div class="row gutters">
+										<div class="col-xl-7 col-lg-7 col-md-6 col-sm-8">
 
-						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
-							<div class="col-4"><span class="badge badge-pill badge-danger col-12" id="shAltaObser" >[+] Agregar Observacion</span></div>
-							<form id="altaForm" name="altaForm">
-								<input type="hidden" id="tablaModal" name="tablaModal" value="{$tablaModal}" />
-								<input type="hidden" id="id_empleado" name="id_empleado" value="yes" />
-								<input type="hidden" id="esDeEmpr" name="esDeEmpr" value="0" />
-								<div class="card m-0">
-									<div class="card-body">
-										<div class="row gutters">
-											<div class="col-xl-7 col-lg-7 col-md-6 col-sm-8">
+											<div class="form-group ">
+												<label for="motivo" class="col-form-label">Motivo</label>
+												<select class="form-control" id="id_motivo_observacion" name="id_motivo_observacion">	
+												</select>
+											</div>
 
-												
+											<div class="form-group">
+												<label for="detalle" class="col-form-label">Detalle</label>
+												<textarea class="form-control" id="detalle" name="detalle">{$detalle}</textarea>
+											</div>	
 
-												<div class="form-group ">
-													<label for="motivo" class="col-form-label">Motivo</label>
-													<select class="form-control" id="id_motivo_observacion" name="id_motivo_observacion">	
-													</select>
+											<div class="form-group">
+												<label class="label">Fecha</label>
+												<div class="custom-date-input ">
+													<input type="text" name="fecha_observacion" id="fecha_observacion" class="datepicker form-control" data-value="{$fecha_observacion}" value="{$fecha_observacion}">
 												</div>
-
-												<div class="form-group">
-													<label for="detalle" class="col-form-label">Detalle</label>
-													<textarea class="form-control" id="detalle" name="detalle">{$detalle}</textarea>
-												</div>	
-
-												<div class="form-group">
-													<label class="label">Fecha</label>
-													<div class="custom-date-input ">
-														<input type="text" name="fecha_observacion" id="fecha_observacion" class="datepicker form-control" data-value="{$fecha_observacion}" value="{$fecha_observacion}">
-													</div>
-												</div>																					
-											</div>
+											</div>																					
 										</div>
-										
-										<div class="row gutters">
-											<div class="btn-group ">
-												<button type="button" id="submitb" name="submitb" class="btn btn-primary float-right">Guardar</button>
-											</div>
-										</div>
-
 									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+									
+									<div class="row gutters">
+										<div class="custom-btn-group">
+											<button type="button" id="submitb" name="submitb" class="btn btn-primary float-right">Guardar</button>
+											<button type="button" id="submitCanceClose" name="submitCanceClose" class="btn btn-danger">Cancelar</button>
+										</div>
+									</div>
 
-					<div class="table-container">
-						<div class="t-header">Listado de observaciones</div>
-						<div class="table-responsive">
-							<table id="hideSearchExample" class="table table-hover table-bordered table-light m-0">
-								<thead>
-									<tr>
-										<th class="no-sort">Fecha</th>
-										<th class="no-sort">Motivo</th>
-										<th class="no-sort">Detalle</th>
-										<th class="no-sort">Acciones</th>
-									</tr>
-								</thead>
-								<tbody id='tablaObserv'>
-								
-								</tbody>
-						</table>
-						</div>
+								</div>
+							</div>
+						</form>
 					</div>
+				</div>
+
+				<div class="table-container">
+					<div class="t-header">Listado de observaciones</div>
+					<div class="table-responsive">
+						<table id="hideSearchExample" class="table table-hover table-bordered table-light m-0">
+							<thead>
+								<tr>
+									<th class="no-sort">Fecha</th>
+									<th class="no-sort">Motivo</th>
+									<th class="no-sort">Detalle</th>
+									<th class="no-sort">Acciones</th>
+								</tr>
+							</thead>
+							<tbody id='tablaObserv'>
+							
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+				<button type="button" id="submitCanceClose" name="submitCanceClose" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div>
   	</div>
@@ -83,23 +87,7 @@
 
 <!-- MODAL AVISO o CONCLUIDO-->
 <!-- Modal -->
-<div id="terminado" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="footerCenterIconsModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="footerCenterIconsModalLabel">Alta observación</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div aria-hidden="true">Se agregó correctamente la observación.</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="mymodalMSJ" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="mymodalMSJ" class="modal fade bd-example-modal-sm" tabindex="-2" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -134,8 +122,7 @@
 <script src="assets/vendor/datatables/vfs_fonts.js"></script>
 <script src="assets/vendor/datatables/html5.min.js"></script>
 <script src="assets/vendor/datatables/buttons.print.min.js"></script>
-<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
-<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+
 
 <!-- Datepickers -->
 <script src="assets/vendor/datepicker/js/picker.js"></script>
@@ -144,42 +131,64 @@
 <script type="text/javascript" language="javascript" >
 
 	function verObservacion(idEmpl, apel, nom){
-		
+		//escribe la fecha ACTUAL en el input
 		$('.datepicker').pickadate('set').set('select', new Date());
 		document.getElementById("detalle").value = "";
 		document.getElementById("myLargeModalLabel").innerHTML = 'Observaciones del empleado: '+apel+' '+nom;
 		document.getElementById("id_empleado").value = idEmpl;
 		$('#observModal').modal("show");
-		observListado('altaForm');
-		observMotivos('altaForm');
+		listObservaciones('altaForm');
+		motivosObservacion('altaForm');
 	}
 
-	function observMotivos(id){
-	    var data = $('#'+id).serialize();
-	    
+	function editarObservacion(idOb, feOb, IdMoOb, detOb){
+		elemIsVisible('altaForm','shAltaObser');
+		document.getElementById("id_obs").value = idOb;
+		document.getElementById("id_motivo_ob").value = IdMoOb;
+		document.getElementById("detalle").value = detOb;
+		$('.datepicker').pickadate('set').set('select', new Date(feOb.replace(/-/g, ",")));
+		motivosObservacion('altaForm');
+	}
+
+	function bajaObservacion(idOb){
+		document.getElementById("id_obs").value = idOb;
+		document.getElementById("bajaElim").value = 1;
+		editObservForm('altaForm');
+	}
+
+	function eliminarObservacion(idOb){
+		document.getElementById("id_obs").value = idOb;
+		document.getElementById("bajaElim").value = 2;
+		editObservForm('altaForm');
+	}
+
+	//arma el combo de motivos disponibles para las observaciones.
+	function motivosObservacion(idForm){
+	    var data = $('#'+idForm).serialize();
+	    $("#id_motivo_ob").val('11'); //seteo el combo por defecto
+
 	    $.ajax({
 	        type: 'POST',
 	        url: "./models/ajaxmotivoobservacion.php",
 	        data: data,
-	        success: function(data) {
+	        success: function(data){
 	        	$('#id_motivo_observacion').html(data);
 	        },
-	        error: function(data) { // if error occured
+	        error: function(data){ // if error occured
 	            alert("Error occured, please try again");
 	        },
 	    });
 	}
 
-	function observListado(id){
-	    var data = $('#'+id).serialize();
+	function listObservaciones(idForm){
+	    var data = $('#'+idForm).serialize();
 
 	    $.ajax({
 	        type: 'POST',
 	        url: "./models/empleadoobservaciones.php",
 	        data: data,
-	        success: function(data) {
-
-	        	if (data=="Sin datos"){
+	        success: function(data){
+	        	if (data == "Sin datos"){
 	        		document.getElementById("tablaObserv").innerHTML = 'No se registran observaciones.';
 	        	}
 	        	else{
@@ -192,22 +201,110 @@
 	    });
 	}
 
-	
+	function listEmpleados(idForm){
+	    var data = $('#'+idForm).serialize();
+	    
+	    $.ajax({
+	        type: 'POST',
+	        url: "./models/getlist.php",
+	        data: data,
+	        success: function(data){
+	        	if(data == "Sin resultados"){
+	        		$("#mymodalMSJ").modal("show");
+	        		document.getElementById("tipoMsjTXT").innerHTML = "No se encontraron registros para su b&uacute;squeda.";
+	        	}
+	        	else{
+	        		$('#tablaBusqueda').html(data);
+	        	}            
+	        },
+	        error: function(data) { // if error occured
+	            alert("Error occured, please try again");
+	        },
+	    });
+	}
+
+	function altaObservForm(idForm){
+
+		if ($('#fecha_observacion').val() == ""){
+			alert("Debe seleccionar una fecha.");
+		}
+		else{
+			fo = $("[name='fecha_observacion_submit']").val();
+			$('#fecha_observacion').val(fo);
+
+			var data = $('#'+idForm).serialize();
+			
+			$.ajax({
+				type: 'POST',
+				url: "./models/add_record_ajax_modal.php",
+				data: data,
+				success: function(data){			
+					limpiarFormulario();		//limpio los campos
+					listObservaciones('altaForm');	//refresco el listado p q muestre los cambios 
+					document.getElementById("shAltaObserMSJ").innerHTML = "Se agregó correctamente la observación.";
+					$('#shAltaObserMSJ').show();
+				},
+				error: function(data){ // if error occured
+					alert("Error occured, please try again");
+				},
+			});
+		}
+	}
+
+	function editObservForm(idForm){
+		fo = $("[name='fecha_observacion_submit']").val();
+		$('#fecha_observacion').val(fo);
+
+		var data = $('#'+idForm).serialize();
+			
+		$.ajax({
+			type: 'POST',
+			url: "./models/edit_record_ajax_modal.php",
+			data: data,
+			success: function(data){
+				limpiarFormulario();        //limpio los campos
+				listObservaciones('altaForm');  //refresco el listado p q muestre los cambios 
+				document.getElementById("shAltaObserMSJ").innerHTML = "Se modificó correctamente la observación.";
+				$('#shAltaObserMSJ').show();
+			},
+			error: function(data){ // if error occured
+				alert("Error occured, please try again");
+			},
+		});
+	}
+
+	function elemIsVisible(eleOculto, eleTexto){
+		if(!$('#'+eleOculto).is(':visible')){
+			$('#'+eleOculto).show();
+			document.getElementById(eleTexto).innerHTML = "[-] Agregar Observación";
+		}
+	}
+
+	function limpiarFormulario() {
+		$("#id_obs").val('yes');
+		$("#id_motivo_ob").val('11');
+		$("#bajaElim").val('yes');
+		$("#detalle").val('');
+		$('.datepicker').pickadate('set').set('select', new Date());
+		motivosObservacion('altaForm');
+	}
+
 
 	$(document).ready(function(){
- 	
+ 		//es p la fecha_observacion
 		$('.datepicker').pickadate({
-                monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                today: 'Hoy',
-                clear: 'Cancelar',
-                close: 'Cerrar',
-                editable: true,
-                selectYears: true,
-                formatSubmit: 'yyyy-mm-dd'
-            });
-
-		$('.datepicker').pickadate('set').set('select', new Date());
+            monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            today: 'Hoy',
+            clear: 'Cancelar',
+            close: 'Cerrar',
+            editable: false,
+            selectYears: 10,
+            formatSubmit: 'yyyy-mm-dd',
+            min: new Date(2015,1,1),
+  			max: new Date(),
+  			disable: [1]
+        });
 
 		$('#altaForm').hide();
 	 	$('#shBusqueda').click(function(){ 	
@@ -217,10 +314,10 @@
 
 		$('#shAltaObser').click(function(){ 	
 			$('#altaForm').toggle();
-			document.getElementById("shAltaObser").innerHTML = "[-] Agregar Observacion";
+			document.getElementById("shAltaObser").innerHTML = "[-] Agregar Observación";
 		});
  
-		
+		//p la busqueda de empleados - listado
 		$('a#byDNICUIL').click(function(){ 	
 			elemento = document.getElementById("tipobusqueda");
 			elemento.value = "DNICUIL";
@@ -245,71 +342,31 @@
 		var submit = document.getElementById('submit');
 
 		submit.addEventListener('click', function(event){ 
-			updateform('consultaForm');
+			listEmpleados('consultaForm');
 		});
 
 		var submitb = document.getElementById('submitb');
 
 		submitb.addEventListener('click', function(event){ 
-			observForm('altaForm');
+			if(document.getElementById("id_obs").value == 'yes'){
+				altaObservForm('altaForm');
+			}
+			else{
+				editObservForm('altaForm');
+			}
 		});
 
-		function updateform(id){
-	    var data = $('#'+id).serialize();
-	     //alert("sale:"+data);
+		var botCancelClose = document.getElementById('submitCanceClose');
 
-		    $.ajax({
-		        type: 'POST',
-		        url: "./models/getlist.php",
-		        data: data,
-		        success: function(data) {
-
-		        	if (data=="Sin resultados"){
-		        		$("#mymodalMSJ").modal("show");
-		        		document.getElementById("tipoMsjTXT").innerHTML = "No se encontraron registros para su b&uacute;squeda.";
-		        	}
-		        	else{
-		        		$('#tablaBusqueda').html(data);
-		        	}            
-		        },
-		        error: function(data) { // if error occured
-		            alert("Error occured, please try again");
-		        },
-		    });
-		}
+		botCancelClose.addEventListener('click', function(event){
+			limpiarFormulario();
+		});
 
 
-		function observForm(id){
-
-			if ($('#fecha_observacion').val()=="") {
-				alert("Debe seleccionar una fecha.");
-			} else {
-					//FALTA DETERMINAR Si ES UPDATE O INSERT verificar si viene con id por GET/POST
-					fo = $("[name='fecha_observacion_submit']").val();
-					$('#fecha_observacion').val(fo);
-
-					var data = $('#'+id).serialize();
-					
-					$.ajax({
-						type: 'POST',
-						url: "./models/add_records_ajax.php",
-						data: data,
-						success: function(data) {						
-							$('#terminado').modal('show');
-						},
-						error: function(data) { // if error occured
-							alert("Error occured, please try again");
-						},
-					});
-				}
-			}
-
-		
-
-		$('form input').keydown(function (e) {
+		$('form input').keydown(function (e){
 		    if (e.keyCode == 13) {
 		        e.preventDefault();
-		        updateform('consultaForm');
+		        listEmpleados('consultaForm');
 		        return false;
 		    }
 		});
