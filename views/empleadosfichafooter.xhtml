@@ -14,8 +14,7 @@
 		<script src="assets/vendor/datatables/vfs_fonts.js"></script>
 		<script src="assets/vendor/datatables/html5.min.js"></script>
 		<script src="assets/vendor/datatables/buttons.print.min.js"></script>
-		<script src="assets/vendor/chartist/js/chartist.min.js"></script> 
-		<script src="assets/vendor/chartist/js/chartist-tooltip.js"></script>
+		
 
 		<!-- Input Masks JS -->
 		<script src="assets/vendor/input-masks/cleave.min.js"></script>
@@ -78,9 +77,13 @@
 			function ValidaStr(str, idCampo)
 			{
 				sale="";	
-				if (str.length<3) { 
-						$('#'+idCampo).focus();
-				} else { sale=str; }	
+				if (str.length<3) {
+					$('#'.idCampo).append('<div class="invalid-feedback">es requerido</div>');
+					$('#'+idCampo).addClass( "is-invalid" );
+					$('#'+idCampo).removeClass( "is-valid" );
+					$('#'+idCampo).focus();
+
+				} else { sale=str; $('#'+idCampo).addClass( "is-valid" ); $('#'+idCampo).removeClass( "is-invalid" ); }	
 				return(sale);
 			}
 
@@ -113,7 +116,7 @@
 					var temp = str.replace(/\s/g,'');
 					valid=validaCuit(temp);
 					if (typeof(valid)=='boolean' && (!valid)) { 
-						alert('CUIT/CUIL Incorrecto.'); return; 
+						console.log('CUIT/CUIL Incorrecto.'); return; 
 					} else {
 						var lon=11;
 						var data = "id="+temp+"&token={$token}";
@@ -142,37 +145,60 @@
 				else { var lon=2;}
 				if (str.length<lon) { 
 					$('#'+idCampo).focus(); 
-				} else { sale=str;}
+					$('#'+idCampo).addClass( "is-invalid" );
+					$('#'+idCampo).removeClass( "is-valid" );
+				} else { 
+					sale=str;
+					$('#'+idCampo).addClass( "is-valid" );
+					$('#'+idCampo).removeClass( "is-invalid" );
+				}
 				return(sale);
 			}
 
 
 			var submit = document.getElementById('submit'); 
-			submit.addEventListener('click', function(event){ 
+			submit.addEventListener('click', function(event){
+				console.log('verificar form...'); 
 			    updateform('consultaForm'); 
-			}); 
+			});
+
+
 			
 			function updateform(id){
 				
-				if (ValidaStr($('#razon_social').val(), 'razon_social')=="") {
-					alert("El campo debe tener al menos 4 Caracteres.")
+				if (ValidaStr($('#apellido').val(), 'apellido')=="") {
+					//alert("El campo debe tener al menos 4 Caracteres.")
+					$( "#apellido" ).addClass( "is-invalid" );
+				}else { $( "#apellido" ).addClass( "is-valid" ); }
+				
+				if (ValidaStr($('#nombre').val(), 'nombre')=="") {
+					//alert("El campo debe tener al menos 4 Caracteres.")
+					$( "#nombre" ).addClass( "is-invalid" );
+				}else { $( "#nombre" ).addClass( "is-valid" ); }
 
-				{nocache}  						
-				 {$omitir}  } else if (ValidaNum($('#cuit').val(), 'cuit')=="") {
-				 {$omitir}	alert("El CUIT/CUIL debe tener al menos 11 numeros")		
-				{/nocache}						
-				} else if (ValidaStr($('#domicilio').val(), 'domicilio')=="") {
-					alert("El campo debe tener al menos 4 Caracteres.")				
-				} else if (ValidaNum($('#telefono').val(), 'telefono')=="") {
-					alert("El campo debe tener al menos 7 Caracteres.")				
-				} else if (ValidaStr($('#correo_electronico').val(), 'correo_electronico')=="") {
-					alert("El campo debe tener al menos 8 Caracteres.")				
-				//} else if (ValidaNum($('#fecha_inicio_actividad').val(), 'fecha_inicio_actividad')=="") {
-				//	alert("La fecha no debe ser nula.")				
-				} else if (ValidaNum($('#fecha_alta').val(), 'fecha_alta')=="") {
-					alert("La fecha no debe ser nula.")				
-				}else {
-						
+				console.log('paso 1');
+
+	   			if (ValidaNum($('#cuil').val(), 'cuil')=="") {
+					$( "#cuil" ).addClass( "is-invalid" );
+				}else { $( "#cuil" ).addClass( "is-valid" ); }		
+				
+				console.log('paso 2'); 
+				 var dom= ValidaStr($('#domicilio').val(), 'domicilio');		
+				 
+				console.log('paso 3');
+				 var tel= ValidaNum($('#telefono').val(), 'telefono');
+				 var mail=ValidaStr($('#correo_electronico').val(), 'correo_electronico');
+				console.log('paso 4');
+				 
+				console.log('paso 5');
+				 var alta= ValidaNum($('#fecha_alta').val(), 'fecha_alta');
+				 var nac = ValidaNum($('#fecha_nacimiento').val(), 'fecha_nacimiento'); 
+				 var nac = ValidaNum($('#fecha_ingreso_empresa').val(), 'fecha_ingreso_empresa'); 
+				 var tmp = ValidaNum($('#sueldo').val(), 'sueldo');
+				
+				
+
+				console.log('paso 6');	
 						
 						//FALTA DETERMINAR Si ES UPDATE O INSERT verificar si viene con id por GET/POST
 						
@@ -185,7 +211,7 @@
 						alert("Evaluar "+data);
 						$.ajax({
 							type: 'POST',
-							url: "./models/{$modo}_record_ajax.php",
+							url: "./models/{$modo}_record_ajax_.php",
 							data: data,
 							success: function(data) {						
 								console.log('Resultado:'+data);
@@ -197,7 +223,7 @@
 								alert("Error occured, please try again");
 							},
 						});
-				}
+				
 			}
 
 			$('form input').keydown(function (e) {

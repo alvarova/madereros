@@ -241,7 +241,7 @@
 				success: function(data){			
 					limpiarFormulario();		//limpio los campos
 					listObservaciones('altaForm');	//refresco el listado p q muestre los cambios 
-					document.getElementById("shAltaObserMSJ").innerHTML = "Se agregó correctamente la observación.";
+					document.getElementById("shAltaObserMSJ").innerHTML = '<div style="margin: 5px;"><button type="button" class="btn btn-primary">	Se agregó de manera correcta la observación al empleado.</button></div>';
 					$('#shAltaObserMSJ').show();
 				},
 				error: function(data){ // if error occured
@@ -370,6 +370,11 @@
 		        return false;
 		    }
 		});
+
+		elemento = document.getElementById("tipobusqueda");
+		elemento.value = "AN";		
+		document.getElementById("tipobusquedaTXT").innerHTML = "Búsqueda por Apellido/Nombre";
+
 
  	});
 

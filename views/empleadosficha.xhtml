@@ -1,6 +1,6 @@
 <div class="row justify-content-center gutters">
 						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
-							<form>
+							<form method="POST" id="consultaForm">
 								<div class="card m-0">
 									<div class="card-header">
 										<div class="card-title">Ficha Empleados</div>
@@ -18,49 +18,71 @@
 										<div class="row gutters">
 											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
 												<div class="form-group">
-													<label for="apellido" class="col-form-label">Nombre y Apellido</label>
-													<input type="text" class="form-control" id="apellido" placeholder="Apellido">
-													<input type="text" class="form-control" id="nombre" placeholder="Nombre">
+													<label for="apellido" class="col-form-label">Apellido y Nombre</label>
+													<input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+													
+													<input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+													
 												</div>
 												<div class="form-group">
-													<label for="documento" class="col-form-label">Nro DNI/CUIT</label>
-													<input type="text" class="form-control" id="documento" placeholder="Nro DNI">
-													<input type="text" class="form-control" id="cuil" placeholder="Nro CUIL">
+													<label for="documento" class="col-form-label">DNI/CUIL</label>
+													<input type="text" class="form-control" id="cuil" placeholder="30123456781">
+													<input type="text" class="form-control" id="documento" placeholder="12345678" required>
 												</div>
 												<div class="form-group">
 													<label for="correo_electronico" class="col-form-label">E-mail</label>
-													<input type="text" class="form-control" id="correo_electronico" placeholder="Email">
+													<input type="email" class="form-control" id="correo_electronico" placeholder="correo@email.com" required>
+													
 												</div>
 												<div class="form-group">
 													<label for="domicilio" class="col-form-label">Domicilio</label>
-													<input type="text" class="form-control" id="domicilio" placeholder="Domicilio">
+													<input type="text" class="form-control" id="domicilio" placeholder="Calle y Nro 1234">
+													
 												</div>
 												<div class="form-group">
 													<label for="telefono" class="col-form-label">Telefono</label>
-													<input type="number" class="form-control" id="telefono" placeholder="Telefono">
+													<input type="number" class="form-control" id="telefono" placeholder="03424506970" required>
+													
 												</div>
 											</div>
 											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
-												<div class="form-group">
+												<div class="form-group ">
 													<label for="fecha_nacimiento" class="col-form-label">Fecha Nacimiento</label>
-													<input type="number" class="form-control" id="fecha_nacimiento" placeholder="Fecha Nacimiento">
+													<div class="custom-date-input">
+														<input type="text"  id="fecha_nacimiento" placeholder="Fecha Nacimiento" class="datepicker form-control" data-value="{$fecha_alta}" value="{if empty($fecha_alta)}0000-00-00{else}{$fecha_alta}{/if}" required>
+													</div>
+													
 												</div>
 												<div class="form-group">
 													<label for="nacionalidad" class="col-form-label">Nacionalidad</label>
 													<input type="text" class="form-control" id="nacionalidad" placeholder="Nacionalidad">
 												</div>	
+
+												<div class="form-group ">
+													<label for="localidad" class="col-form-label">Localidad</label>
+														<select class="form-control" id="id_localidad" name="id_localidad">	
+															{$listaLocalidades}
+														</select>
+														
+												</div>																								
 												<div class="form-group">
-													<label for="id_localidad" class="col-form-label">Localidad</label>
-													<input type="text" class="form-control" id="id_localidad" placeholder="Localidad">
-												</div>												
-												<div class="form-group">
-													<label for="sexo" class="col-form-label">Sexo</label>
-													<input type="text" class="form-control" id="sexo" placeholder="sexo">
+													<label for="sexo" class="my-1 mr-2" for="inlineFormCustomSelectPref">Sexo</label>
+													<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="sexo">
+														<option selected>Sexo...</option>
+														<option value="M">Masculino</option>
+														<option value="F">Femenino</option>
+														<option value="O">Otro</option>
+													</select>													
+
 												</div>												
 												
 												<div class="form-group">
 													<label for="id_estado_civil" class="col-form-label">Estado Civil</label>
-													<input type="text" class="form-control" id="id_estado_civil" placeholder="Estado Civil">
+													<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="id_estado_civil">
+														<option selected>Estado Civil...</option>
+
+														<option value="O">Otro</option>
+													</select>
 												</div>
 
 											</div>
@@ -76,7 +98,12 @@
 
 												<div class="form-group">
 													<label for="sueldo" class="col-form-label">Sueldo</label>
-													<input type="text" class="form-control sueldo" id="sueldo" placeholder="Sueldo">
+													<div class="input-group">
+													 <div class="input-group-prepend">	
+													   <span class="input-group-text">$</span>
+													 </div>  
+													   <input type="text" class="form-control sueldo input-group-text" id="sueldo" placeholder="Sueldo" required>
+													</div>
 												</div>
 
 												<div class="row gutters justify-content-center">
@@ -89,22 +116,31 @@
 											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">												
 												<!--fecha_ingreso_empresa/es_afiliado / fecha_afiliacion / sueldo / id_usuario_sistema / fecha_alta / fecha_baja-->
 												<div class="form-group">
-													<label for="fecha_ingreso_empresa" class="col-form-label">Fecha Ingreso a la empresa</label>
-													<input type="text" class="form-control" id="fecha_ingreso_empresa" placeholder="Fecha Ingreso">
+													<label  class="label">Fecha Ingreso a la empresa</label>
+													<div class="custom-date-input">
+														<input type="text" class="datepicker form-control" id="fecha_ingreso_empresa" placeholder="Fecha Ingreso" data-value="{$fecha_ingreso_empresa}" value="">
+													</div>
 												</div>																																																
 												
 												<div class="form-group">
 													<label for="fecha_afiliacion" class="col-form-label">Fecha Afiliacion</label>
-													<input type="text" class="form-control" id="fecha_afiliacion" placeholder="Fecha Afiliacion">
+													<div class="custom-date-input">
+														<input type="text" class="datepicker form-control" id="fecha_afiliacion" placeholder="Fecha Afiliacion" data-value="{$fecha_afiliacion}" value="">
+														
+													</div>
 												</div>
 
 												<div class="form-group">
 													<label for="fecha_alta" class="col-form-label">Fecha Alta</label>
-													<input type="text" class="form-control" id="fecha_alta" placeholder="Fecha Alta">
+													<div class="custom-date-input">
+														<input type="text" class="datepicker form-control" id="fecha_alta" placeholder="Fecha Alta" data-value="{$fecha_alta}" value="">
+													</div>
 												</div>
 												<div class="form-group">
 													<label for="fecha_baja" class="col-form-label">Fecha baja</label>
-													<input type="text" class="form-control" id="fecha_baja" placeholder="Fecha baja">
+													<div class="custom-date-input">
+														<input type="text" class="datepicker form-control" id="fecha_baja" placeholder="Fecha baja" data-value="{$fecha_baja}" value="">
+													</div>
 												</div>																																																												
 											</div>
 
@@ -112,7 +148,17 @@
 										
 										<div class="row gutters">
 											<div class="col-xl-12">
-												<button type="button" id="submit" name="submit" class="btn btn-primary float-right">Submit Form</button>
+												
+												<div class="btn-group" role="group">
+													<button type="button" id="submit" name="submit" class="btn btn-primary float-right">Guardar</button>
+													<button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													opciones...
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="#">Guardar y agregar</a>
+														<a class="dropdown-item" href="#">Limpiar</a>
+													</div>
+												</div>
 											</div>
 										</div>
 
