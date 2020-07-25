@@ -31,7 +31,7 @@ define('server','localhost');
 define('db','SOEIM');
 
 /*TOKENS */
-						  
+define("empleado",    '088ef99bff55c67dc863f83980a66a9b');						  
 define("empleados",    '192cdbee330355bf76c9e82d4456c2c6');
 define("empresas",'dcfcc703b4dad82c3f554b716b2bcd55');
 define("trabajointerno",   'f5ffc67a958c4b8b022c506c9b9cb2d4');

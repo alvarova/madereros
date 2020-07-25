@@ -13,13 +13,23 @@ if(!isset($_SESSION['id_usuario'])){
 $tabla = ""; 
 $varSql = "";
 $intoSql = "";
- 
+
+if(isset($_POST['token'])){ 
+  $tabla = obtenerTabla(strtoupper($_POST['token']));
+  var_dump($_POST['token']);  
+  unset($_POST['token']);
+}
+
+
+//if (isset($_POST['empleados'])) { $empleadosABM=TRUE; unset($_POST['empleados']);  } else {$empleadosABM=FALSE;}
+
 //reseteo los forms de fechas con id _submit a campos o el token para no procesarlos como form
 
 if(isset($_POST['fecha_alta_submit'])){
   $_POST['fecha_alta'] = $_POST['fecha_alta_submit'];
   unset($_POST['fecha_alta_submit']);
 }
+if ($_POST['fecha_alta']=="") $_POST['fecha_alta']='0000-00-00'; 
 
 if(!isset($_POST['fecha_baja_submit'])){
   $_POST['fecha_baja'] = FechaNull($_POST['fecha_baja']);
@@ -28,17 +38,20 @@ if(!isset($_POST['fecha_baja_submit'])){
   unset($_POST['fecha_baja_submit']);
 }
 
-if(!isset($_POST['fecha_inicio_actividad_submit'])){
-  $_POST['fecha_inicio_actividad'] = FechaNull($_POST['fecha_inicio_actividad']);
+if ($tabla!='empleado'){
+  if(!isset($_POST['fecha_inicio_actividad_submit'])){  
+    $_POST['fecha_inicio_actividad'] = FechaNull($_POST['fecha_inicio_actividad']);
+  }else{
+    $_POST['fecha_inicio_actividad'] = FechaNull($_POST['fecha_inicio_actividad_submit']);
+    unset($_POST['fecha_inicio_actividad_submit']);
+  }
 }else{
-  $_POST['fecha_inicio_actividad'] = FechaNull($_POST['fecha_inicio_actividad_submit']);
-  unset($_POST['fecha_inicio_actividad_submit']);
+  if (isset($_POST['sueldo'])) {$_POST['sueldo']=str_replace( ',', '', $_POST['sueldo']);}
+  //var_dump($_POST);
+  if (!isset($_POST['es_afiliado'])) {$_POST['es_afiliado']='0';}
 }
+  
 
-if(isset($_POST['token'])){ 
-  $tabla = obtenerTabla(strtoupper($_POST['token']));  
-  unset($_POST['token']);
-}
 // como viene del formulario compartido para modificar, quito el ID
 if(isset($_POST['id'])){
   unset($_POST['fecha_alta_submit']);
@@ -81,9 +94,9 @@ foreach($_POST as $campo => $variable){
     }
   }  //Si es ultimo cierro )
 }
-
+//var_dump($intoSql);
 $insertSql = "INSERT INTO $tabla (".$intoSql." VALUES (".$varSql;
-//var_dump("SQL:".$insertSql);
+//var_dump("::::".$varSql);
 $result = 0;
 $stmt = $dbconn->prepare($insertSql);
 if($stmt->execute()){
@@ -91,5 +104,5 @@ if($stmt->execute()){
   //var_dump('Insert as:'.$result);
 }
 $dbconn = null;
-echo $result;
+echo $insertSql.'--'.$result;
   

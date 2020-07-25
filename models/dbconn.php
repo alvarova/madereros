@@ -41,8 +41,10 @@ function FechaNull($v){
 
 function obtenerTabla($str){
   //echo "Entra obtener tabla - ".$str ;
-  if ($str == strtoupper('192cdbee330355bf76c9e82d4456c2c6')){ 
+  if ($str == strtoupper('088EF99BFF55C67DC863F83980A66A9B')){ 
     $sale = "empleado";
+  }elseif ($str == strtoupper('192cdbee330355bf76c9e82d4456c2c6')){ 
+    $sale = "empleados";
   }
   elseif($str == strtoupper('dcfcc703b4dad82c3f554b716b2bcd55')){ 
     $sale = "empresa";

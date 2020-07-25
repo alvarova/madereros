@@ -100,6 +100,32 @@ switch  ($acc) {
 			include_once("./models/empresaficha.php");
 			break;
 		}
+
+		case 'empleadosficha': {
+			
+			// Cargar los JS para gestion de grids 
+			$smarty->assign('head', $acc.'head.xhtml');
+			$smarty->assign('footer', $acc.'footer.xhtml');			
+			$smarty->assign('empleadosactive', 'active-page');
+			$smarty->assign('token', empleado);
+			if (isset($_GET['id'])) 
+			{ 
+				$modo='edit';
+				$smarty->assign('id', $_GET['id']);
+				$smarty->assign('OmiteOpcA', '<!--');
+				$smarty->assign('OmiteOpcB', '-->');				
+			} else { 
+				$modo='add'; 
+				$smarty->assign('HideBegin', '<!--');
+				$smarty->assign('HideEnd', '-->');
+			} //  Update o Insert
+			//var_dump("-".$modo);
+			$smarty->assign('modo', $modo);
+			$smarty->assign('acc', "empleadosficha");
+			$smarty->assign('tipobusqueda', empresas);
+			include_once("./models/empleadosficha.php");
+			break;
+		}
 		case 'empleados': {
 			// Cargar los JS para gestion de grids 
 			$smarty->assign('head', $acc.'head.xhtml');
@@ -110,28 +136,7 @@ switch  ($acc) {
 			$smarty->assign('tipobusqueda', empleados);
 			$smarty->assign('tablaModal', observacion_empleado);
 			break;
-		}
-		case 'empleadosficha': {
-			
-			// Cargar los JS para gestion de grids 
-			$smarty->assign('head', $acc.'head.xhtml');
-			$smarty->assign('footer', $acc.'footer.xhtml');			
-			$smarty->assign('empresasactive', 'active-page');
-			$smarty->assign('token', empresas);
-			if (isset($_GET['id'])) 
-			{ 
-				$modo='edit';
-			} else { 
-				$modo='add'; 
-				$smarty->assign('HideBegin', '<!--');
-				$smarty->assign('HideEnd', '-->');
-			} //  Update o Insert
-			//var_dump("-".$modo);
-			$smarty->assign('acc', "empresasficha");
-			$smarty->assign('tipobusqueda', empresas);
-			include_once("./models/empresaficha.php");
-			break;
-		}
+		}		
 		case 'trabajointerno': {
 			// Cargar los JS para gestion de grids 
 			$smarty->assign('head', $acc.'head.xhtml');

@@ -41,7 +41,66 @@
 				numeralThousandsGroupStyle: 'thousand'
 			});
 		});		
+
+
 		$(document).ready(function(){
+
+			$('#id_empresa_submit').on('keyup', function() {
+				//console.log('tecla');
+				var key = $(this).val();		
+				var dataString = 'empresa='+key;
+				
+				$.ajax({
+					type: "POST",
+					url: "models/listaEmpleadosAjax.php",
+					data: dataString,
+					success: function(data) {
+						//Escribimos las sugerencias que nos manda la consulta
+						$('#suggestions').fadeIn(1000).html(data);
+						//Al hacer click en alguna de las sugerencias
+						$('.suggest-element').on('click', function(){
+								//Obtenemos la id unica de la sugerencia pulsada
+								var id = $(this).attr('id');
+								//Editamos el valor del input con data de la sugerencia pulsada
+								$('#key').val($('#'+id).attr('data'));
+								//Hacemos desaparecer el resto de sugerencias
+								$('#suggestions').fadeOut(1000);
+								$("#id_empresa_submit").val($('#'+id).attr('data'));
+								$("#id_empresa").val(id);
+								//alert('Has seleccionado el '+id+' '+$('#'+id).attr('data'));
+								return false;
+						});
+					}
+				});
+			});
+			$('#id_categoria_empleado_submit').on('keyup', function() {
+				var key = $(this).val();		
+				var dataString = 'categoria_empleado='+key;
+				$.ajax({
+					type: "POST",
+					url: "models/listaEmpleadosAjax.php",
+					data: dataString,
+					success: function(data) {
+						//Escribimos las sugerencias que nos manda la consulta
+						$('#suggestions').fadeIn(1000).html(data);
+						//Al hacer click en alguna de las sugerencias
+						$('.suggest-element').on('click', function(){
+								//Obtenemos la id unica de la sugerencia pulsada
+								var id = $(this).attr('id');
+								//Editamos el valor del input con data de la sugerencia pulsada
+								$('#key').val($('#'+id).attr('data'));
+								//Hacemos desaparecer el resto de sugerencias
+								$('#suggestions').fadeOut(1000);
+								$("#id_categoria_empleado_submit").val($('#'+id).attr('data'));
+								$("#id_categoria_empleado").val(id);
+								//alert('Has seleccionado el '+id+' '+$('#'+id).attr('data'));
+								return false;
+						});
+					}
+				});
+			});
+		
+		
 
             $('.datepicker').pickadate({
                 monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -204,14 +263,14 @@
 						
 						//fia = $("[name='fecha_inicio_actividad_submit']").val();
 						//$('#fecha_inicio_actividad').val(fia);
-						console.log( $("[name='fecha_inicio_actividad']").val());
+						//console.log( $("[name='fecha_inicio_actividad']").val());
 						//fia = $("[name='fecha_alta_submit']").val();
 						//$('#fecha_alta').val(fia);						
 						var data = $('#'+id).serialize();
-						alert("Evaluar "+data);
+						//console.log("Parseo: "+data);
 						$.ajax({
 							type: 'POST',
-							url: "./models/{$modo}_record_ajax_.php",
+							url: "./models/{$modo}_record_ajax.php",
 							data: data,
 							success: function(data) {						
 								console.log('Resultado:'+data);
