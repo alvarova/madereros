@@ -1,7 +1,8 @@
 <div class="row justify-content-center gutters">
 						<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
 							<form method="POST" id="consultaForm" name="consultaForm">
-								<input type="hidden" id="token" name="token" value="{$token}" />	
+								<input type="hidden" id="token" name="token" value="{$token}" />
+								{$idEmpleado}	
 								<div class="card m-0">
 									<div class="card-header">
 										<div class="card-title">Ficha Empleados</div>
@@ -39,7 +40,7 @@
 												</div>
 												<div class="form-group">
 													<label for="telefono" class="col-form-label">Telefono</label>
-													<input type="number" class="form-control" id="telefono" name="telefono"  placeholder="03424506970" {$telefono} required>
+													<input type="text" class="form-control" id="telefono" name="telefono"  placeholder="03424506970" {$telefono} required>
 													
 												</div>
 											</div>
@@ -119,7 +120,7 @@
 											<div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">												
 												<div class="form-group">
 													<label  class="label">Número de Afiliado</label>
-													<input type="text" class="form-control" id="nro_afiliado" name="nro_afiliado" placeholder="Numero de afiliado" value="{$nro_afiliado}">
+													<input type="text" class="form-control" id="nro_afiliado" name="nro_afiliado" placeholder="Número de afiliado" value="{$nro_afiliado}">
 													
 												</div>																																																
 												
@@ -172,3 +173,30 @@
 						</div>
 					</div>
 
+
+
+
+<!-- MODAL AVISO o CONCLUIDO-->
+<!-- Modal -->
+<div class="modal fade" id="terminado" tabindex="-1" role="dialog" aria-labelledby="footerCenterIconsModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="footerCenterIconsModalLabel">Empresas</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div aria-hidden="true" class='line1'>Se {$modoedicion} correctamente los datos del empleado.</div>
+				<span aria-hidden="true" class='line2'>A continuacion Ud. puede <a href="#" id="addEmpleados" class='text-info'><b>agregar/editar Empleados</b></a> o </span>	
+				<span aria-hidden="true">o continuar con la edición de los datos.</span>
+					
+			</div>
+			<div class="modal-footer justify-content-center">
+				
+				<a href="#" id="linkEdit" role="button" class="btn btn-primary"><i class="icon-check2"></i> Ok </a>
+			</div>
+		</div>
+	</div>
+</div>

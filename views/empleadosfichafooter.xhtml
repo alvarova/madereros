@@ -215,13 +215,6 @@
 			}
 
 
-			var submit = document.getElementById('submit'); 
-			submit.addEventListener('click', function(event){
-				console.log('verificar form...'); 
-			    updateform('consultaForm'); 
-			});
-
-
 			
 			function updateform(id){
 				
@@ -256,11 +249,10 @@
 				 var tmp = ValidaNum($('#sueldo').val(), 'sueldo');
 				
 				
-
+				 var numItems = $('.is-invalid').length;
+				 alert('Existen '+numItems+' elementos sin validar.');
 				console.log('paso 6');	
-						
-						//FALTA DETERMINAR Si ES UPDATE O INSERT verificar si viene con id por GET/POST
-						
+				
 						//fia = $("[name='fecha_inicio_actividad_submit']").val();
 						//$('#fecha_inicio_actividad').val(fia);
 						//console.log( $("[name='fecha_inicio_actividad']").val());
@@ -274,8 +266,18 @@
 							data: data,
 							success: function(data) {						
 								console.log('Resultado:'+data);
+								//alert(data);
+								if (data=='0') {
+									$('div.line1').replaceWith('<h4>No se pudo guardar</h4>');
+									$( "span.line2" ).replaceWith( "Verifique los campos, y complete la informacion solicitada." );
+									$('.modal-footer').hide();
+								}else{
+									$('div.line1').replaceWith('<div aria-hidden="true">Se {$modoedicion} correctamente la empresa.</div>');
+									$( "span.line2" ).replaceWith('<span aria-hidden="true">A continuacion Ud. puede <a href="#" id="addEmpleados" class="text-info"><b>agregar/editar Empleados</b></a> o </span>');
+									$('.modal-footer').show();
+								}
 								$("#linkEdit").prop("href", "index.php?acc=empresasficha&id="+data);
-								$("#addEmpleados").prop("href", "index.php?acc=empleadosalta&idEmpresa="+data);
+								$("#addEmpleados").prop("href", "index.php?acc=empleadoalta&id="+data);
 								$('#terminado').modal('show');
 							},
 							error: function(data) { // if error occured
@@ -284,6 +286,15 @@
 						});
 				
 			}
+
+
+			var submit = document.getElementById('submit'); 
+			submit.addEventListener('click', function(event){
+				console.log('verificar form...'); 
+
+			    updateform('consultaForm'); 
+			});
+
 
 			$('form input').keydown(function (e) {
 			    if (e.keyCode == 13) {

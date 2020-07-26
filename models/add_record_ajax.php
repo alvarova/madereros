@@ -16,7 +16,7 @@ $intoSql = "";
 
 if(isset($_POST['token'])){ 
   $tabla = obtenerTabla(strtoupper($_POST['token']));
-  var_dump($_POST['token']);  
+  //var_dump($_POST['token']);  
   unset($_POST['token']);
 }
 
@@ -47,8 +47,13 @@ if ($tabla!='empleado'){
   }
 }else{
   if (isset($_POST['sueldo'])) {$_POST['sueldo']=str_replace( ',', '', $_POST['sueldo']);}
+  if (!isset($_POST['cuil']) or ($_POST['cuil']=="")) { $_POST['cuil']="0";}
+  if (!isset($_POST['documento']) or ($_POST['documento']=="")) { $_POST['documento']="0";} 
   //var_dump($_POST);
   if (!isset($_POST['es_afiliado'])) {$_POST['es_afiliado']='0';}
+  if (!isset($_POST['id_categoria_empleado']) or ($_POST['id_categoria_empleado']=="")) { $_POST['id_categoria_empleado']="NULL";} 
+  if (!isset($_POST['id_empresa']) or ($_POST['id_empresa']=="")) { $_POST['id_empresa']="NULL";} 
+  if (!isset($_POST['sueldo']) or ($_POST['sueldo']=="")) { $_POST['sueldo']="0";} 
 }
   
 
@@ -96,7 +101,7 @@ foreach($_POST as $campo => $variable){
 }
 //var_dump($intoSql);
 $insertSql = "INSERT INTO $tabla (".$intoSql." VALUES (".$varSql;
-//var_dump("::::".$varSql);
+//var_dump("::::".$insertSql);
 $result = 0;
 $stmt = $dbconn->prepare($insertSql);
 if($stmt->execute()){
@@ -104,5 +109,4 @@ if($stmt->execute()){
   //var_dump('Insert as:'.$result);
 }
 $dbconn = null;
-echo $insertSql.'--'.$result;
-  
+echo $result;

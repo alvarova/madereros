@@ -27,8 +27,7 @@ if (is_numeric($id)){
   /* Fetch all of rows in the result set */
   $data = $sth->fetch(PDO::FETCH_ASSOC);
 
-
-   //$smarty->assign('id_empresa', $data["id_empresa"]);
+   $smarty->assign('idEmpleado', '<input type="hidden" id="id" name="id" value="'.$id.'" />');
    $smarty->assign('apellido', ' value="'.$data["apellido"].'" ');
    $smarty->assign('nombre', ' value="'.$data["nombre"].'" ');
    $cuit=str_replace("-","",trim(' value="'.$data['cuil']).'" ');
